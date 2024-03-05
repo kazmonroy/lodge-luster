@@ -1,0 +1,11 @@
+.logo {
+  display: flex;
+  flex-direction: column;
+  color: var(--color-grey-700);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: 'Inconsolata', monospace;
+  letter-spacing: 2px;
+  padding: 1.5rem 0.5rem;
+  font-size: 1.2rem;
+}
