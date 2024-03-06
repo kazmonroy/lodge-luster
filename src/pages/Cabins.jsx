@@ -1,15 +1,18 @@
-import { useQuery } from '@tanstack/react-query';
-import { getCabins } from '../services/apiCabins';
+import CabinTable from '../features/cabins/CabinTable';
+import Row from '../ui/Row';
 
 function Cabins() {
-  const { data, isLoading } = useQuery({
-    queryFn: getCabins,
-    queryKey: ['cabins'],
-  });
-
-  console.log(data);
-  if (isLoading) return <p>is loading...</p>;
-  return <div>Cabins!</div>;
+  return (
+    <>
+      <Row direction='horizontal'>
+        <h2>All Cabins</h2>
+        <p>Filter / sort </p>
+      </Row>
+      <Row>
+        <CabinTable />
+      </Row>
+    </>
+  );
 }
 
 export default Cabins;

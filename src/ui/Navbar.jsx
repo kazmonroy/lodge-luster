@@ -6,7 +6,7 @@ import {
   HiOutlineCog6Tooth,
   HiOutlineUser,
 } from 'react-icons/hi2';
-import styles from '../styles/Navbar.module.css';
+import styles from './styles/Navbar.module.css';
 
 const routes = [
   { path: '/', page: 'Home', icon: <HiOutlineHome /> },
