@@ -3,14 +3,14 @@ import { getCabins } from '../../services/apiCabins';
 
 import styles from './styles/CabinTable.module.css';
 import Spinner from '../../ui/Spinner';
+import CabinRow from './CabinRow';
 
 function CabinTable() {
-  const { data, isLoading } = useQuery({
+  const { data: cabins, isLoading } = useQuery({
     queryFn: getCabins,
     queryKey: ['cabins'],
   });
 
-  console.log(data);
   if (isLoading) return <Spinner />;
   return (
     <div className={styles.table} role='table'>
@@ -22,6 +22,9 @@ function CabinTable() {
         <div>Discount</div>
         <div></div>
       </div>
+      {cabins.map((cabin) => (
+        <CabinRow cabin={cabin} key={cabin.id} />
+      ))}
     </div>
   );
 }
