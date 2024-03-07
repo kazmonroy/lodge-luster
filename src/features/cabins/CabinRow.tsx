@@ -1,6 +1,6 @@
 import { formatCurrency } from '../../utils/helpers';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteCabin } from '../../services/apiCabins';
+import { deleteCabin } from '../../services/apiCabins-v1';
 import { Cabin } from '../../services/types/collection';
 import toast from 'react-hot-toast';
 

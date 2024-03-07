@@ -1,4 +1,4 @@
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
@@ -24,21 +24,14 @@ function CreateCabinForm() {
     queryKey: ['cabins'],
     onSuccess: () => {
       queryClient.invalidateQueries(['cabins']);
-      toast.success('cabin created!');
+      toast.success('New cabin successfully created!');
       reset();
     },
     onError: (err: Error) => toast.error(err.message),
   });
 
   const onSubmit: SubmitHandler<Cabin> = (data) => {
-    const newCabin = {
-      ...data,
-      image:
-        data.image?.length === 0
-          ? 'https://wgjzrjfkwsremzyxnsxm.supabase.co/storage/v1/object/public/cabin-images/cabin-empty.png'
-          : data.image,
-    };
-    mutate(newCabin);
+    mutate({ ...data, image: data.image![0]! });
   };
 
   return (
@@ -50,6 +43,7 @@ function CreateCabinForm() {
         <input
           type='text'
           id='name'
+          disabled={isCreating}
           {...register('name', { required: 'This field is required' })}
         />
       </FormRow>
@@ -57,6 +51,7 @@ function CreateCabinForm() {
         <input
           type='number'
           id='maxCapacity'
+          disabled={isCreating}
           {...register('maxCapacity', {
             required: 'This field is required',
             min: {
@@ -70,6 +65,7 @@ function CreateCabinForm() {
         <input
           type='number'
           id='regularPrice'
+          disabled={isCreating}
           {...register('regularPrice', {
             required: 'This field is required',
             min: {
@@ -83,6 +79,7 @@ function CreateCabinForm() {
         <input
           type='number'
           id='discount'
+          disabled={isCreating}
           defaultValue={0}
           {...register('discount', {
             required: 'This field is required',
@@ -93,10 +90,20 @@ function CreateCabinForm() {
         />
       </FormRow>
       <FormRow label='Description' error={errors?.description?.message}>
-        <textarea id='description' {...register('description')} />
+        <textarea
+          id='description'
+          disabled={isCreating}
+          {...register('description')}
+        />
       </FormRow>
       <FormRow label='Cabin image' error={errors?.image?.message}>
-        <input id='image' type='file' accept='image/*' {...register('image')} />
+        <input
+          id='image'
+          disabled={isCreating}
+          type='file'
+          accept='image/*'
+          {...register('image')}
+        />
       </FormRow>
 
       <FormRow>
@@ -104,7 +111,7 @@ function CreateCabinForm() {
           <Button style='secondary' type='reset'>
             Cancel
           </Button>
-          <Button disabled={isCreating}>create cabin</Button>
+          <Button disabled={isCreating}>Create cabin</Button>
         </>
       </FormRow>
     </form>

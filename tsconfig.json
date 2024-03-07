@@ -2,7 +2,15 @@
   "compilerOptions": {
     "target": "ES2020",
     "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable",
+      "ES2021.String",
+      "es2015",
+      "es2016",
+      "esnext"
+    ],
     "module": "ESNext",
     "skipLibCheck": true,
     "types": ["vite/client"],
