@@ -14,6 +14,7 @@ function CreateCabinForm() {
     register,
     handleSubmit,
     formState: { errors },
+    getValues,
     reset,
   } = useForm<Cabin>();
   const queryClient = useQueryClient();
@@ -26,6 +27,7 @@ function CreateCabinForm() {
       toast.success('cabin created!');
       reset();
     },
+    onError: (err: Error) => toast.error(err.message),
   });
 
   const onSubmit: SubmitHandler<Cabin> = (data) => {
@@ -44,27 +46,56 @@ function CreateCabinForm() {
       onSubmit={handleSubmit(onSubmit)}
       className={`${styles.form} ${styles.regular}`}
     >
-      <FormRow label='Cabin name'>
-        <input type='text' id='name' {...register('name')} />
+      <FormRow label='Cabin name' error={errors?.name?.message}>
+        <input
+          type='text'
+          id='name'
+          {...register('name', { required: 'This field is required' })}
+        />
       </FormRow>
-      <FormRow label='Max capacity'>
-        <input type='number' id='maxCapacity' {...register('maxCapacity')} />
+      <FormRow label='Max capacity' error={errors?.maxCapacity?.message}>
+        <input
+          type='number'
+          id='maxCapacity'
+          {...register('maxCapacity', {
+            required: 'This field is required',
+            min: {
+              value: 1,
+              message: 'Capacity should be more than 1',
+            },
+          })}
+        />
       </FormRow>
-      <FormRow label='Regular price'>
-        <input type='number' id='regularPrice' {...register('regularPrice')} />
+      <FormRow label='Regular price' error={errors?.regularPrice?.message}>
+        <input
+          type='number'
+          id='regularPrice'
+          {...register('regularPrice', {
+            required: 'This field is required',
+            min: {
+              value: 1,
+              message: 'Regular price should be more than 1',
+            },
+          })}
+        />
       </FormRow>
-      <FormRow label='Discount'>
+      <FormRow label='Discount' error={errors?.discount?.message}>
         <input
           type='number'
           id='discount'
           defaultValue={0}
-          {...register('discount')}
+          {...register('discount', {
+            required: 'This field is required',
+            validate: (value) =>
+              Number(value)! <= Number(getValues()!.regularPrice!) ||
+              'Discount should be less than Regular Price',
+          })}
         />
       </FormRow>
-      <FormRow label='Description'>
+      <FormRow label='Description' error={errors?.description?.message}>
         <textarea id='description' {...register('description')} />
       </FormRow>
-      <FormRow label='Cabin image'>
+      <FormRow label='Cabin image' error={errors?.image?.message}>
         <input id='image' type='file' accept='image/*' {...register('image')} />
       </FormRow>
 
