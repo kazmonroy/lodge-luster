@@ -1,22 +1,29 @@
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Cabin } from '../../services/types/collection';
+import { createCabin } from '../../services/apiCabins';
 import toast from 'react-hot-toast';
 
 import FormRow from '../../ui/FormRow';
 import Button from '../../ui/Button';
-
 import styles from '../../ui/styles/Form.module.css';
-import { createCabin } from '../../services/apiCabins';
-import { Cabin } from '../../services/types/collection';
 
-function CreateCabinForm() {
+interface Props {
+  cabinToEdit: Cabin | {};
+}
+
+function CreateCabinForm({ cabinToEdit = {} }: Props) {
+  const { id: editId, ...editValues } = cabinToEdit;
+  const isEditSession = Boolean(editId);
   const {
     register,
     handleSubmit,
     formState: { errors },
     getValues,
     reset,
-  } = useForm<Cabin>();
+  } = useForm<Cabin>({
+    defaultValues: isEditSession ? editValues : {},
+  });
   const queryClient = useQueryClient();
 
   const { mutate, isLoading: isCreating } = useMutation({
@@ -111,7 +118,9 @@ function CreateCabinForm() {
           <Button style='secondary' type='reset'>
             Cancel
           </Button>
-          <Button disabled={isCreating}>Create cabin</Button>
+          <Button disabled={isCreating}>
+            {isEditSession ? 'Save changes' : 'Create cabin'}
+          </Button>
         </>
       </FormRow>
     </form>

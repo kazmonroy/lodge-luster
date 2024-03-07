@@ -1,43 +1,17 @@
 .spinner {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
   margin: 4.8rem auto;
-
-  div {
-    display: inline-block;
-    position: absolute;
-    left: 8px;
-    width: 16px;
-    background: var(--color-grey-400);
-    animation: spinner 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
-  }
-
-  div:nth-child(1) {
-    left: 8px;
-    animation-delay: -0.24s;
-  }
-
-  div:nth-child(2) {
-    left: 32px;
-    animation-delay: -0.12s;
-  }
-
-  div:nth-child(3) {
-    left: 56px;
-    animation-delay: 0;
-  }
+  width: 6.4rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, var(--color-brand-600) 94%, #0000)
+      top/10px 10px no-repeat,
+    conic-gradient(#0000 30%, var(--color-brand-600));
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 10px), #000 0);
+  animation: rotate 1.5s infinite linear;
 }
 
-@keyframes spinner {
-  0% {
-    top: 8px;
-    height: 64px;
-  }
-  50%,
-  100% {
-    top: 24px;
-    height: 32px;
+@keyframes rotate {
+  to {
+    transform: rotate(1turn);
   }
 }

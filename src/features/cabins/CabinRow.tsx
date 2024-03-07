@@ -6,6 +6,9 @@ import toast from 'react-hot-toast';
 
 import styles from './styles/CabinRow.module.css';
 import Spinner from '../../ui/Spinner';
+import Button from '../../ui/Button';
+import { useState } from 'react';
+import CreateCabinForm from './CreateCabinForm';
 
 interface Props {
   cabin: Cabin;
@@ -23,6 +26,8 @@ function CabinRow({ cabin }: Props) {
     discount,
     image,
   } = cabin;
+
+  const [showForm, setShowForm] = useState<boolean>(false);
 
   const queryClient = useQueryClient();
 
@@ -42,18 +47,25 @@ function CabinRow({ cabin }: Props) {
 
   if (isDeleting) return <Spinner />;
   return (
-    <div className={styles.cabinRow} key={cabinId}>
-      <img src={image ? image : emptyCabin} alt={name!} />
-      <div>{name}</div>
-      <div>{maxCapacity} guests</div>
-      <div className={styles.price}>{formatCurrency(regularPrice!)}</div>
-      {discount ? (
-        <div className={styles.discount}>{formatCurrency(discount)}</div>
-      ) : (
-        <span>&mdash;</span>
-      )}
-      <button onClick={() => handleDelete(cabinId)}>Delete</button>
-    </div>
+    <>
+      <div className={styles.cabinRow} key={cabinId}>
+        <img src={image ? image : emptyCabin} alt={name!} />
+        <div>{name}</div>
+        <div>{maxCapacity} guests</div>
+        <div className={styles.price}>{formatCurrency(regularPrice!)}</div>
+        {discount ? (
+          <div className={styles.discount}>{formatCurrency(discount)}</div>
+        ) : (
+          <span>&mdash;</span>
+        )}
+        <div>
+          <Button onClick={() => setShowForm((prev) => !prev)}>Edit</Button>
+
+          <Button onClick={() => handleDelete(cabinId)}>Delete</Button>
+        </div>
+      </div>
+      {showForm && <CreateCabinForm cabinToEdit={cabin} />}
+    </>
   );
 }
 
