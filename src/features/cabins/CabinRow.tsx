@@ -1,8 +1,10 @@
 import { formatCurrency } from '../../utils/helpers';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteCabin } from '../../services/apiCabins';
-import styles from './styles/CabinRow.module.css';
 import { Cabin } from '../../services/types/collection';
+import toast from 'react-hot-toast';
+
+import styles from './styles/CabinRow.module.css';
 import Spinner from '../../ui/Spinner';
 
 interface Props {
@@ -28,10 +30,10 @@ function CabinRow({ cabin }: Props) {
     mutationFn: deleteCabin,
     queryKey: ['cabins'],
     onSuccess: () => {
-      console.log(`Cabin ${cabinId} deleted!`);
+      toast.success(`Cabin ${cabinId} deleted!`);
       queryClient.invalidateQueries({ queryKey: ['cabins'] });
     },
-    onError: (err: Error) => alert(err.message),
+    onError: (err: Error) => toast.error(err.message),
   });
 
   const handleDelete = (id: number) => {

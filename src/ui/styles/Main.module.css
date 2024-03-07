@@ -1,4 +1,12 @@
 .main {
   padding: 2rem;
   background-color: var(--color-grey-50);
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
 }
