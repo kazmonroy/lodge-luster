@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteCabin } from '../../services/apiCabins';
 import styles from './styles/CabinRow.module.css';
 import { Cabin } from '../../services/types/collection';
+import Spinner from '../../ui/Spinner';
 
 interface Props {
   cabin: Cabin;
@@ -23,18 +24,21 @@ function CabinRow({ cabin }: Props) {
 
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation({
+  const { mutate, isLoading: isDeleting } = useMutation({
     mutationFn: deleteCabin,
     queryKey: ['cabins'],
     onSuccess: () => {
-      alert(`Cabin ${cabinId} deleted!`);
-      queryClient.cancelQueries({ queryKey: ['cabins'] });
+      console.log(`Cabin ${cabinId} deleted!`);
+      queryClient.invalidateQueries({ queryKey: ['cabins'] });
     },
+    onError: (err: Error) => alert(err.message),
   });
 
   const handleDelete = (id: number) => {
     mutate(id);
   };
+
+  if (isDeleting) return <Spinner />;
   return (
     <div className={styles.cabinRow} key={cabinId}>
       <img src={image ? image : emptyCabin} alt={name!} />
