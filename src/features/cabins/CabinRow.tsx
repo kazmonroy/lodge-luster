@@ -1,6 +1,6 @@
 import { formatCurrency } from '../../utils/helpers';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteCabin } from '../../services/apiCabins-v1';
+import { deleteCabin } from '../../services/apiCabins';
 import { Cabin } from '../../services/types/collection';
 import toast from 'react-hot-toast';
 
@@ -13,6 +13,7 @@ interface Props {
 
 const emptyCabin =
   'https://wgjzrjfkwsremzyxnsxm.supabase.co/storage/v1/object/public/cabin-images/cabin-empty.png';
+
 function CabinRow({ cabin }: Props) {
   const {
     id: cabinId,
@@ -20,7 +21,6 @@ function CabinRow({ cabin }: Props) {
     maxCapacity,
     regularPrice,
     discount,
-
     image,
   } = cabin;
 

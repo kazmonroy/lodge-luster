@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getCabins } from '../../services/apiCabins-v1';
+import { getCabins } from '../../services/apiCabins';
 
 import styles from './styles/CabinTable.module.css';
 import Spinner from '../../ui/Spinner';
