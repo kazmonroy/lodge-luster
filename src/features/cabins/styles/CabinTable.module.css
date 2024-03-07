@@ -11,11 +11,11 @@
   grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
   column-gap: 2.4rem;
   align-items: center;
-  background-color: var(--color-grey-50);
+  background-color: var(--color-grey-0);
   border-bottom: 1px solid var(--color-grey-100);
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--color-grey-500);
   padding: 1.5rem 2rem;
   font-size: 0.8rem;

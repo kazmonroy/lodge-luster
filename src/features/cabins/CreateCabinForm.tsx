@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Cabin } from '../../services/types/collection';
-import { createCabin } from '../../services/apiCabins';
+import { createEditCabin } from '../../services/apiCabins';
 import toast from 'react-hot-toast';
 
 import FormRow from '../../ui/FormRow';
@@ -9,7 +9,7 @@ import Button from '../../ui/Button';
 import styles from '../../ui/styles/Form.module.css';
 
 interface Props {
-  cabinToEdit: Cabin | {};
+  cabinToEdit?: Cabin;
 }
 
 function CreateCabinForm({ cabinToEdit = {} }: Props) {
@@ -26,8 +26,8 @@ function CreateCabinForm({ cabinToEdit = {} }: Props) {
   });
   const queryClient = useQueryClient();
 
-  const { mutate, isLoading: isCreating } = useMutation({
-    mutationFn: createCabin,
+  const { mutate: createCabin, isLoading: isCreating } = useMutation({
+    mutationFn: createEditCabin,
     queryKey: ['cabins'],
     onSuccess: () => {
       queryClient.invalidateQueries(['cabins']);
@@ -37,9 +37,31 @@ function CreateCabinForm({ cabinToEdit = {} }: Props) {
     onError: (err: Error) => toast.error(err.message),
   });
 
+  const { mutate: editCabin, isLoading: isEditing } = useMutation({
+    mutationFn: ({ newCabin, id }: { newCabin: Cabin; id: number }) =>
+      createEditCabin(newCabin, id),
+    queryKey: ['cabins'],
+    onSuccess: () => {
+      queryClient.invalidateQueries(['cabins']);
+      toast.success('New cabin successfully edited!');
+      reset();
+    },
+    onError: (err: Error) => toast.error(err.message),
+  });
+
   const onSubmit: SubmitHandler<Cabin> = (data) => {
-    mutate({ ...data, image: data.image![0]! });
+    const imgUpload =
+      typeof data.image === 'string' ? data.image : data.image![0]!;
+    // mutate({ ...data, image: data.image![0]! });
+
+    if (isEditSession) {
+      editCabin({ newCabin: { ...data, image: imgUpload }, id: editId });
+    } else {
+      createCabin({ ...data, image: imgUpload });
+    }
   };
+
+  const isUpdating = isEditing || isCreating;
 
   return (
     <form
@@ -50,7 +72,7 @@ function CreateCabinForm({ cabinToEdit = {} }: Props) {
         <input
           type='text'
           id='name'
-          disabled={isCreating}
+          disabled={isUpdating}
           {...register('name', { required: 'This field is required' })}
         />
       </FormRow>
@@ -58,7 +80,7 @@ function CreateCabinForm({ cabinToEdit = {} }: Props) {
         <input
           type='number'
           id='maxCapacity'
-          disabled={isCreating}
+          disabled={isUpdating}
           {...register('maxCapacity', {
             required: 'This field is required',
             min: {
@@ -72,7 +94,7 @@ function CreateCabinForm({ cabinToEdit = {} }: Props) {
         <input
           type='number'
           id='regularPrice'
-          disabled={isCreating}
+          disabled={isUpdating}
           {...register('regularPrice', {
             required: 'This field is required',
             min: {
@@ -86,7 +108,7 @@ function CreateCabinForm({ cabinToEdit = {} }: Props) {
         <input
           type='number'
           id='discount'
-          disabled={isCreating}
+          disabled={isUpdating}
           defaultValue={0}
           {...register('discount', {
             required: 'This field is required',
@@ -99,14 +121,14 @@ function CreateCabinForm({ cabinToEdit = {} }: Props) {
       <FormRow label='Description' error={errors?.description?.message}>
         <textarea
           id='description'
-          disabled={isCreating}
+          disabled={isUpdating}
           {...register('description')}
         />
       </FormRow>
       <FormRow label='Cabin image' error={errors?.image?.message}>
         <input
           id='image'
-          disabled={isCreating}
+          disabled={isUpdating}
           type='file'
           accept='image/*'
           {...register('image')}
@@ -118,7 +140,7 @@ function CreateCabinForm({ cabinToEdit = {} }: Props) {
           <Button style='secondary' type='reset'>
             Cancel
           </Button>
-          <Button disabled={isCreating}>
+          <Button disabled={isUpdating}>
             {isEditSession ? 'Save changes' : 'Create cabin'}
           </Button>
         </>
