@@ -1,14 +1,13 @@
 import { formatCurrency } from '../../utils/helpers';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteCabin } from '../../services/apiCabins';
+
 import { Cabin } from '../../services/types/collection';
-import toast from 'react-hot-toast';
 
 import styles from './styles/CabinRow.module.css';
 import Spinner from '../../ui/Spinner';
 import Button from '../../ui/Button';
 import { useState } from 'react';
 import CreateCabinForm from './CreateCabinForm';
+import { useDeleteCabin } from './hooks/useDeleteCabin';
 
 interface Props {
   cabin: Cabin;
@@ -29,20 +28,10 @@ function CabinRow({ cabin }: Props) {
 
   const [showForm, setShowForm] = useState<boolean>(false);
 
-  const queryClient = useQueryClient();
-
-  const { mutate, isLoading: isDeleting } = useMutation({
-    mutationFn: deleteCabin,
-    queryKey: ['cabins'],
-    onSuccess: () => {
-      toast.success(`Cabin ${cabinId} deleted!`);
-      queryClient.invalidateQueries({ queryKey: ['cabins'] });
-    },
-    onError: (err: Error) => toast.error(err.message),
-  });
+  const { deleteCabin, isDeleting } = useDeleteCabin();
 
   const handleDelete = (id: number) => {
-    mutate(id);
+    deleteCabin(id);
   };
 
   if (isDeleting) return <Spinner />;

@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Cabin } from '../../services/types/collection';
-import { createEditCabin } from '../../services/apiCabins';
+import { useCreateCabin } from './hooks/useCreateCabin';
+import { useEditCabin } from './hooks/useEditCabin';
 import toast from 'react-hot-toast';
 
 import FormRow from '../../ui/FormRow';
@@ -24,40 +24,27 @@ function CreateCabinForm({ cabinToEdit = {} }: Props) {
   } = useForm<Cabin>({
     defaultValues: isEditSession ? editValues : {},
   });
-  const queryClient = useQueryClient();
 
-  const { mutate: createCabin, isLoading: isCreating } = useMutation({
-    mutationFn: createEditCabin,
-    queryKey: ['cabins'],
-    onSuccess: () => {
-      queryClient.invalidateQueries(['cabins']);
-      toast.success('New cabin successfully created!');
-      reset();
-    },
-    onError: (err: Error) => toast.error(err.message),
-  });
-
-  const { mutate: editCabin, isLoading: isEditing } = useMutation({
-    mutationFn: ({ newCabin, id }: { newCabin: Cabin; id: number }) =>
-      createEditCabin(newCabin, id),
-    queryKey: ['cabins'],
-    onSuccess: () => {
-      queryClient.invalidateQueries(['cabins']);
-      toast.success('New cabin successfully edited!');
-      reset();
-    },
-    onError: (err: Error) => toast.error(err.message),
-  });
+  const { createCabin, isCreating } = useCreateCabin();
+  const { editCabin, isEditing } = useEditCabin();
 
   const onSubmit: SubmitHandler<Cabin> = (data) => {
     const imgUpload =
       typeof data.image === 'string' ? data.image : data.image![0]!;
-    // mutate({ ...data, image: data.image![0]! });
 
     if (isEditSession) {
       editCabin({ newCabin: { ...data, image: imgUpload }, id: editId });
     } else {
-      createCabin({ ...data, image: imgUpload });
+      createCabin(
+        { ...data, image: imgUpload },
+        {
+          onSuccess: (data) => {
+            console.log(data);
+            toast.success(`Cabin successfully created!`);
+            reset();
+          },
+        }
+      );
     }
   };
 

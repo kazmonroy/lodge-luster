@@ -20,7 +20,7 @@ export async function deleteCabin(id: number) {
   }
 }
 
-export async function createEditCabin(newCabin: Cabin, id: number) {
+export async function createEditCabin(newCabin: Cabin, id?: number) {
   const hasImgPath = typeof newCabin.image === "string";
   const imgName = `${Math.random()}-${newCabin!.image!.name!}`.replaceAll(
     "/",
