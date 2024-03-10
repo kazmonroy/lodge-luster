@@ -169,7 +169,7 @@ export type Database = {
       settings: {
         Row: {
           breakfastPrice: number | null;
-          created_at: string;
+          created_at?: string;
           id: number;
           maxBookingLength: number | null;
           maxGuestsPerBooking: number | null;

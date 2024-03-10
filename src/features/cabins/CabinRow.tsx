@@ -1,7 +1,6 @@
 import { formatCurrency } from '../../utils/helpers';
-
 import { Cabin } from '../../services/types/collection';
-
+import { useCreateCabin } from './hooks/useCreateCabin';
 import styles from './styles/CabinRow.module.css';
 import Spinner from '../../ui/Spinner';
 import Button from '../../ui/Button';
@@ -13,7 +12,6 @@ import {
   HiOutlinePencilSquare,
   HiXMark,
 } from 'react-icons/hi2';
-import { useCreateCabin } from './hooks/useCreateCabin';
 
 interface Props {
   cabin: Cabin;
@@ -36,7 +34,7 @@ function CabinRow({ cabin }: Props) {
   const [showForm, setShowForm] = useState<boolean>(false);
 
   const { deleteCabin, isDeleting } = useDeleteCabin();
-  const { createCabin, isCreating } = useCreateCabin();
+  const { createCabin } = useCreateCabin();
 
   const handleDelete = (id: number) => {
     deleteCabin(id);
@@ -71,7 +69,7 @@ function CabinRow({ cabin }: Props) {
             <HiOutlinePencilSquare />
           </Button>
 
-          <Button onClick={() => handleDelete(cabinId)}>
+          <Button onClick={() => handleDelete(cabinId!)}>
             <HiXMark />
           </Button>
           <Button onClick={() => handleDuplicate()}>
