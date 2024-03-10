@@ -14,7 +14,7 @@ export async function getSettings() {
   return { data };
 }
 
-export async function updateSettings(newSettings: Settings) {
+export async function updateSetting(newSettings: Settings) {
   const { data, error } = await supabase
     .from("settings")
     .update(newSettings)
