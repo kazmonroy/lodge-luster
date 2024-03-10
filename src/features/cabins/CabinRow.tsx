@@ -8,6 +8,12 @@ import Button from '../../ui/Button';
 import { useState } from 'react';
 import CreateCabinForm from './CreateCabinForm';
 import { useDeleteCabin } from './hooks/useDeleteCabin';
+import {
+  HiOutlineClipboardDocument,
+  HiOutlinePencilSquare,
+  HiXMark,
+} from 'react-icons/hi2';
+import { useCreateCabin } from './hooks/useCreateCabin';
 
 interface Props {
   cabin: Cabin;
@@ -24,14 +30,27 @@ function CabinRow({ cabin }: Props) {
     regularPrice,
     discount,
     image,
+    description,
   } = cabin;
 
   const [showForm, setShowForm] = useState<boolean>(false);
 
   const { deleteCabin, isDeleting } = useDeleteCabin();
+  const { createCabin, isCreating } = useCreateCabin();
 
   const handleDelete = (id: number) => {
     deleteCabin(id);
+  };
+
+  const handleDuplicate = () => {
+    createCabin({
+      name: `Copy of ${cabin.name}`,
+      maxCapacity,
+      regularPrice,
+      discount,
+      image,
+      description,
+    });
   };
 
   if (isDeleting) return <Spinner />;
@@ -48,9 +67,16 @@ function CabinRow({ cabin }: Props) {
           <span>&mdash;</span>
         )}
         <div>
-          <Button onClick={() => setShowForm((prev) => !prev)}>Edit</Button>
+          <Button onClick={() => setShowForm((prev) => !prev)}>
+            <HiOutlinePencilSquare />
+          </Button>
 
-          <Button onClick={() => handleDelete(cabinId)}>Delete</Button>
+          <Button onClick={() => handleDelete(cabinId)}>
+            <HiXMark />
+          </Button>
+          <Button onClick={() => handleDuplicate()}>
+            <HiOutlineClipboardDocument />
+          </Button>
         </div>
       </div>
       {showForm && <CreateCabinForm cabinToEdit={cabin} />}

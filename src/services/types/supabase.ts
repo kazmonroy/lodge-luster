@@ -105,10 +105,10 @@ export type Database = {
       };
       cabins: {
         Row: {
-          created_at: string;
+          created_at?: string;
           description: string | null;
           discount: number | null;
-          id: number;
+          id?: number;
           image: string | null;
           maxCapacity: number | null;
           name: string | null;
