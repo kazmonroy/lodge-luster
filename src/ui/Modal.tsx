@@ -4,8 +4,6 @@ import {
   cloneElement,
   createContext,
   useContext,
-  useEffect,
-  useRef,
   useState,
 } from 'react';
 import { createPortal } from 'react-dom';
@@ -13,6 +11,7 @@ import { HiXMark } from 'react-icons/hi2';
 import styles from './styles/Modal.module.css';
 
 import Row from './Row';
+import useCloseElement from '../hooks/useCloseElement';
 
 interface OpenProps {
   children?: any;
@@ -59,20 +58,7 @@ function Open({ children, opens: opensWindowName }: OpenProps) {
 
 function Window({ children, title, name }: WindowProps) {
   const { close, openName } = useContext(ModalContext);
-  const ref = useRef<HTMLInputElement | null>(null);
-
-  useEffect(() => {
-    function handleClick(e: any) {
-      if (ref.current && !ref.current!.contains(e.target)) {
-        console.log('clicked outside');
-        close();
-      }
-    }
-
-    document.addEventListener('click', handleClick, true);
-
-    return () => document.removeEventListener('click', handleClick);
-  }, [close]);
+  const { ref } = useCloseElement(close);
 
   if (name !== openName) return null;
 
