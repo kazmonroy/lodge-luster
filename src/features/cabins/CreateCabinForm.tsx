@@ -10,9 +10,10 @@ import styles from '../../ui/styles/Form.module.css';
 
 interface Props {
   cabinToEdit?: Cabin;
+  onCloseModal?: () => void;
 }
 
-function CreateCabinForm({ cabinToEdit = {} }: Props) {
+function CreateCabinForm({ cabinToEdit = {}, onCloseModal }: Props) {
   const { id: editId, ...editValues } = cabinToEdit;
   const isEditSession = Boolean(editId);
   const {
@@ -42,6 +43,7 @@ function CreateCabinForm({ cabinToEdit = {} }: Props) {
             console.log(data);
             toast.success(`Cabin successfully created!`);
             reset();
+            onCloseModal?.();
           },
         }
       );
@@ -53,7 +55,9 @@ function CreateCabinForm({ cabinToEdit = {} }: Props) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className={`${styles.form} ${styles.regular}`}
+      className={`${styles.form} ${
+        onCloseModal ? styles.modal : styles.regular
+      }`}
     >
       <FormRow label='Cabin name' error={errors?.name?.message}>
         <input
@@ -124,7 +128,7 @@ function CreateCabinForm({ cabinToEdit = {} }: Props) {
 
       <FormRow>
         <>
-          <Button style='secondary' type='reset'>
+          <Button style='secondary' type='reset' onClick={onCloseModal}>
             Cancel
           </Button>
           <Button disabled={isUpdating}>
