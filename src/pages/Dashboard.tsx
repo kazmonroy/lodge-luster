@@ -4,8 +4,7 @@ function Dashboard() {
   return (
     <>
       <Row>
-        <h1>Dashboard</h1>
-        <p>test</p>
+        <h2>Dashboard</h2>
       </Row>
     </>
   );
