@@ -4,6 +4,8 @@ import {
   cloneElement,
   createContext,
   useContext,
+  useEffect,
+  useRef,
   useState,
 } from 'react';
 import { createPortal } from 'react-dom';
@@ -57,11 +59,26 @@ function Open({ children, opens: opensWindowName }: OpenProps) {
 
 function Window({ children, title, name }: WindowProps) {
   const { close, openName } = useContext(ModalContext);
+  const ref = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    function handleClick(e: any) {
+      if (ref.current && !ref.current!.contains(e.target)) {
+        console.log('clicked outside');
+        close();
+      }
+    }
+
+    document.addEventListener('click', handleClick, true);
+
+    return () => document.removeEventListener('click', handleClick);
+  }, [close]);
 
   if (name !== openName) return null;
+
   return createPortal(
     <div className={styles.overlay}>
-      <div className={styles.modal}>
+      <div className={styles.modal} ref={ref}>
         <Row direction='horizontal'>
           <h3>{title}</h3>
           <button className={styles.btnModal} onClick={close}>

@@ -11,8 +11,6 @@
   }
 
   &.modal {
-    /* width: 80rem; */
-
     .formRow {
       &:first-child {
         padding-top: 2rem;
