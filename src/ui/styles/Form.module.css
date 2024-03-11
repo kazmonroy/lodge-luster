@@ -11,19 +11,25 @@
   }
 
   &.modal {
-    width: 80rem;
+    /* width: 80rem; */
+
+    .formRow {
+      &:first-child {
+        padding-top: 2rem;
+      }
+    }
   }
 }
 
 .formRow {
   display: grid;
   align-items: center;
-  grid-template-columns: 24rem 1fr 1.2fr;
+  grid-template-columns: 16rem 1fr;
   gap: 2.4rem;
   padding: 1.2rem 0;
 
   &:first-child {
-    padding-top: 0;
+    padding-top: 0rem;
   }
 
   &:last-child {

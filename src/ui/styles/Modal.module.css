@@ -17,11 +17,10 @@
     background-color: var(--color-grey-0);
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-lg);
-    padding: 3rem 4rem;
+    padding: 2rem 4rem;
     transition: all 0.5s;
-    display: grid;
-    grid-template-rows: auto 1fr;
-    gap: 2rem;
+
+    max-width: 950px;
 
     .header {
       display: flex;
@@ -37,9 +36,6 @@
     border-radius: var(--border-radius-sm);
     transform: translateX(0.8rem);
     transition: all 0.2s;
-    /* position: absolute;
-    top: 1.2rem;
-    right: 1.9rem; */
 
     &:hover {
       background-color: var(--color-grey-100);

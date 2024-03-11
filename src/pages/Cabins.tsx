@@ -7,7 +7,6 @@ function Cabins() {
     <>
       <Row direction='horizontal'>
         <h2>All Cabins</h2>
-
         <AddCabin />
       </Row>
       <Row>
