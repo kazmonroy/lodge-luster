@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 function useCloseElement(close: () => void, listenCapture = true) {
   const ref = useRef<HTMLInputElement | null>(null);
@@ -10,22 +10,22 @@ function useCloseElement(close: () => void, listenCapture = true) {
       }
     }
 
-    document.addEventListener("click", handleClick, listenCapture);
+    document.addEventListener('click', handleClick, listenCapture);
 
     return () =>
-      document.removeEventListener("click", handleClick, listenCapture);
+      document.removeEventListener('click', handleClick, listenCapture);
   }, [close, listenCapture]);
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
-      if (ref.current && e.key === "Escape") {
+      if (ref.current && e.key === 'Escape') {
         close();
       }
     }
 
-    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener('keydown', handleKeyDown);
 
-    return () => document.removeEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
   }, [close]);
 
   return { ref };
