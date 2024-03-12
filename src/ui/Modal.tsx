@@ -4,6 +4,7 @@ import {
   cloneElement,
   createContext,
   useContext,
+  useEffect,
   useState,
 } from 'react';
 import { createPortal } from 'react-dom';
@@ -43,6 +44,13 @@ function Modal({ children }: { children: JSX.Element[] }) {
   const [openName, setOpenName] = useState<string>('');
   const close = () => setOpenName('');
   const open = setOpenName;
+
+  useEffect(() => {
+    if (openName) {
+      console.log(openName);
+    }
+  }, []);
+
   return (
     <ModalContext.Provider value={{ openName, open, close }}>
       <div>{children}</div>
