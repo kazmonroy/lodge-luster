@@ -62,7 +62,6 @@ function Toggle({ id }: { id: number }) {
       x: window.innerWidth - rect?.width - rect?.x,
       y: rect?.y + rect?.height + 8,
     });
-    console.log(rect);
 
     openId === null || openId !== id ? open(id) : close();
   };

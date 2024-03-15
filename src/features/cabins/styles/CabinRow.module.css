@@ -29,3 +29,15 @@
     color: var(--color-green-700);
   }
 }
+
+.price,
+.nam,
+.discount {
+  color: var(--color-grey-500);
+  font-family: 'Sono', monospace;
+  text-align: right;
+}
+
+.discount {
+  color: var(--color-green-700);
+}

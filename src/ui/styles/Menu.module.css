@@ -1,9 +1,12 @@
 .menuList {
   position: fixed;
-
   background-color: var(--color-grey-0);
   box-shadow: var(--shadow-md);
   border-radius: var(--border-radius-md);
+  max-width: 220px;
+  width: 100%;
+  padding: 0.25rem 0;
+  border: 1px solid var(--color-grey-100);
 }
 
 .toggle {
@@ -30,20 +33,20 @@
   text-align: left;
   background: none;
   border: none;
-  padding: 1rem 2rem;
+  padding: 0.6rem 1rem;
   transition: all 0.2s;
 
   display: flex;
   align-items: center;
-  gap: 1.6rem;
+  gap: 0.6rem;
 
   &:hover {
     background-color: var(--color-grey-50);
   }
 
   & svg {
-    width: 1.6rem;
-    height: 1.6rem;
+    width: 1.2rem;
+    height: 1.2rem;
     color: var(--color-grey-400);
     transition: all 0.3s;
   }
