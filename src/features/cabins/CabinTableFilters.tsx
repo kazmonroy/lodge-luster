@@ -7,6 +7,7 @@ export interface Options {
   label: string;
 }
 function CabinTableFilters() {
+  // TODO write a JSON config file
   const filterField = 'discount';
   const filterOptions: Options[] = [
     {

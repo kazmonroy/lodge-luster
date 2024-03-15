@@ -11,8 +11,8 @@ interface Props {
 function TableFilters({ filterField, filterOptions }: Props) {
   const [searchParams] = useSearchParams();
   const { handleUrlEvent } = useUrl();
-
   const currentFilter = searchParams.get(filterField) || filterOptions.at(0);
+
   const handleClick = (value: string) => {
     handleUrlEvent({ value, field: filterField });
   };
