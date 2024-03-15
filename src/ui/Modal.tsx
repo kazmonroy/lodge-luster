@@ -49,7 +49,7 @@ function Modal({ children }: { children: JSX.Element[] }) {
     if (openName) {
       console.log(openName);
     }
-  }, []);
+  }, [openName]);
 
   return (
     <ModalContext.Provider value={{ openName, open, close }}>

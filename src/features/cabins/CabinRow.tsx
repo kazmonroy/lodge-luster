@@ -1,18 +1,18 @@
 import { formatCurrency } from '../../utils/helpers';
 import { Cabin } from '../../services/types/collection';
 import { useCreateCabin } from './hooks/useCreateCabin';
-import styles from './styles/CabinRow.module.css';
-import Spinner from '../../ui/Spinner';
-import Button from '../../ui/Button';
-import { useState } from 'react';
-import CreateCabinForm from './CreateCabinForm';
 import { useDeleteCabin } from './hooks/useDeleteCabin';
 import {
   HiOutlineClipboardDocument,
   HiOutlinePencilSquare,
   HiXMark,
 } from 'react-icons/hi2';
+import styles from './styles/CabinRow.module.css';
+import Spinner from '../../ui/Spinner';
+import Button from '../../ui/Button';
+import CreateCabinForm from './CreateCabinForm';
 import Modal from '../../ui/Modal';
+import ConfirmDelete from '../../ui/ConfirmDelete';
 
 interface Props {
   cabin: Cabin;
@@ -31,8 +31,6 @@ function CabinRow({ cabin }: Props) {
     image,
     description,
   } = cabin;
-
-  const [showForm, setShowForm] = useState<boolean>(false);
 
   const { deleteCabin, isDeleting } = useDeleteCabin();
   const { createCabin } = useCreateCabin();
@@ -68,7 +66,7 @@ function CabinRow({ cabin }: Props) {
         <div>
           <Modal>
             <Modal.Open opens='cabin-edit'>
-              <Button onClick={() => setShowForm((prev) => !prev)}>
+              <Button>
                 <HiOutlinePencilSquare />
               </Button>
             </Modal.Open>
@@ -78,9 +76,20 @@ function CabinRow({ cabin }: Props) {
             </Modal.Window>
           </Modal>
 
-          <Button onClick={() => handleDelete(cabinId!)}>
-            <HiXMark />
-          </Button>
+          <Modal>
+            <Modal.Open opens='cabin-delete'>
+              <Button>
+                <HiXMark />
+              </Button>
+            </Modal.Open>
+            <Modal.Window name='cabin-delete' title={`Delete cabin ${name}`}>
+              <ConfirmDelete
+                cabinName={name!}
+                onConfirm={() => handleDelete(cabinId!)}
+              />
+            </Modal.Window>
+          </Modal>
+
           <Button onClick={() => handleDuplicate()}>
             <HiOutlineClipboardDocument />
           </Button>
