@@ -1,35 +1,27 @@
 import { useCabins } from './hooks/useCabins';
+import styles from './styles/CabinTable.module.css';
 import Spinner from '../../ui/Spinner';
 import CabinRow from './CabinRow';
-import Table from '../../ui/Table';
 
 function CabinTable() {
   const { cabins, isLoading } = useCabins();
 
   if (isLoading) return <Spinner />;
   return (
-    <Table columns='0.6fr 1.8fr 2.2fr 1fr 1fr 1fr' role='table'>
-      <Table.Header>
+    <div className={styles.table} role='table'>
+      <div className={styles.tableHeader} role='row'>
         <div></div>
         <div>Cabin</div>
         <div>Capacity</div>
         <div>Price</div>
         <div>Discount</div>
         <div></div>
-      </Table.Header>
-      <Table.Body>
-        {cabins!.map((cabin) => (
-          <CabinRow cabin={cabin} key={cabin.id} />
-        ))}
-      </Table.Body>
-    </Table>
+      </div>
+      {cabins!.map((cabin) => (
+        <CabinRow cabin={cabin} key={cabin.id} />
+      ))}
+    </div>
   );
 }
 
 export default CabinTable;
-
-{
-  /* {cabins!.map((cabin) => (
-        <CabinRow cabin={cabin} key={cabin.id} />
-      ))} */
-}

@@ -13,7 +13,6 @@ import Button from '../../ui/Button';
 import CreateCabinForm from './CreateCabinForm';
 import Modal from '../../ui/Modal';
 import ConfirmDelete from '../../ui/ConfirmDelete';
-import Table from '../../ui/Table';
 
 interface Props {
   cabin: Cabin;
@@ -54,7 +53,7 @@ function CabinRow({ cabin }: Props) {
   if (isDeleting) return <Spinner />;
   return (
     <>
-      <Table.Row key={cabinId}>
+      <div className={styles.cabinRow} key={cabinId}>
         <img src={image ? image : emptyCabin} alt={name!} />
         <div>{name}</div>
         <div>{maxCapacity} guests</div>
@@ -95,7 +94,7 @@ function CabinRow({ cabin }: Props) {
             <HiOutlineClipboardDocument />
           </Button>
         </div>
-      </Table.Row>
+      </div>
     </>
   );
 }
