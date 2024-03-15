@@ -45,12 +45,6 @@ function Modal({ children }: { children: JSX.Element[] }) {
   const close = () => setOpenName('');
   const open = setOpenName;
 
-  useEffect(() => {
-    if (openName) {
-      console.log(openName);
-    }
-  }, [openName]);
-
   return (
     <ModalContext.Provider value={{ openName, open, close }}>
       <div>{children}</div>

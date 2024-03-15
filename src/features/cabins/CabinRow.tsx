@@ -14,6 +14,7 @@ import CreateCabinForm from './CreateCabinForm';
 import Modal from '../../ui/Modal';
 import ConfirmDelete from '../../ui/ConfirmDelete';
 import Table from '../../ui/Table';
+import Menu from '../../ui/Menu';
 
 interface Props {
   cabin: Cabin;
@@ -66,6 +67,9 @@ function CabinRow({ cabin }: Props) {
         )}
         <div>
           <Modal>
+            <Button onClick={() => handleDuplicate()}>
+              <HiOutlineClipboardDocument />
+            </Button>
             <Modal.Open opens='cabin-edit'>
               <Button>
                 <HiOutlinePencilSquare />
@@ -91,9 +95,14 @@ function CabinRow({ cabin }: Props) {
             </Modal.Window>
           </Modal>
 
-          <Button onClick={() => handleDuplicate()}>
-            <HiOutlineClipboardDocument />
-          </Button>
+          <Menu.Content>
+            <Menu.Toggle id={cabinId!} />
+            <Menu.List id={cabinId!}>
+              <Menu.Button>Duplicate</Menu.Button>
+              <Menu.Button>Add</Menu.Button>
+              <Menu.Button>Delete</Menu.Button>
+            </Menu.List>
+          </Menu.Content>
         </div>
       </Table.Row>
     </>
