@@ -11,7 +11,6 @@ function CabinTable() {
 
   const [searchParams] = useSearchParams();
   const query = searchParams.get('discount') || 'all';
-  console.log(query);
 
   const filteredCabins =
     query === 'with-discount'

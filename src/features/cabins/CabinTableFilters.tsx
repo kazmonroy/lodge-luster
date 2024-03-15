@@ -19,7 +19,7 @@ function CabinTableFilters() {
     },
     {
       label: 'With Discount',
-      value: 'with-dicount',
+      value: 'with-discount',
     },
   ];
 
