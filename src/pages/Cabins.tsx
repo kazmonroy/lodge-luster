@@ -1,5 +1,6 @@
 import AddCabin from '../features/cabins/AddCabin';
 import CabinTable from '../features/cabins/CabinTable';
+import CabinTableFilters from '../features/cabins/CabinTableFilters';
 import Row from '../ui/Row';
 
 function Cabins() {
@@ -7,6 +8,8 @@ function Cabins() {
     <>
       <Row direction='horizontal'>
         <h2>All Cabins</h2>
+
+        <CabinTableFilters />
         <AddCabin />
       </Row>
       <Row>
