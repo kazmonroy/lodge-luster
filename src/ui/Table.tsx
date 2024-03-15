@@ -1,5 +1,6 @@
 import { createContext, useContext } from 'react';
 import styles from './styles/Table.module.css';
+import { Cabin } from '../services/types/collection';
 interface Context {
   columns: string;
 }
@@ -7,6 +8,11 @@ interface Context {
 interface TableProps {
   children: JSX.Element[];
   columns: string;
+}
+
+interface BodyProps {
+  data: Cabin[];
+  render: (arg: Cabin) => JSX.Element;
 }
 
 const TableContext = createContext<Context>({
@@ -27,12 +33,12 @@ function Header({ children }: { children: JSX.Element[] }) {
   const { columns } = useContext(TableContext);
 
   return (
-    <div
+    <header
       style={{ gridTemplateColumns: columns }}
       className={`${styles.tableHeader}`}
     >
       {children}
-    </div>
+    </header>
   );
 }
 
@@ -49,8 +55,9 @@ function Row({ children }: { children: JSX.Element[] }) {
   );
 }
 
-function Body({ children }: { children: JSX.Element[] }) {
-  return <div>{children}</div>;
+function Body({ data, render }: BodyProps) {
+  if (!data.length) return <div>No data to show at the moment</div>;
+  return <section>{data.map(render)}</section>;
 }
 
 function Footer() {
