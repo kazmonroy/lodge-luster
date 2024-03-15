@@ -9,7 +9,6 @@ import {
 } from 'react-icons/hi2';
 import styles from './styles/CabinRow.module.css';
 import Spinner from '../../ui/Spinner';
-import Button from '../../ui/Button';
 import CreateCabinForm from './CreateCabinForm';
 import Modal from '../../ui/Modal';
 import ConfirmDelete from '../../ui/ConfirmDelete';
@@ -67,42 +66,39 @@ function CabinRow({ cabin }: Props) {
         )}
         <div>
           <Modal>
-            <Button onClick={() => handleDuplicate()}>
-              <HiOutlineClipboardDocument />
-            </Button>
-            <Modal.Open opens='cabin-edit'>
-              <Button>
-                <HiOutlinePencilSquare />
-              </Button>
-            </Modal.Open>
+            <Menu.Content>
+              <Menu.Toggle id={cabinId!} />
+              <Menu.List id={cabinId!}>
+                <Menu.Button
+                  icon={<HiOutlineClipboardDocument />}
+                  onClick={() => handleDuplicate()}
+                >
+                  Duplicate
+                </Menu.Button>
 
-            <Modal.Window name='cabin-edit' title={`Edit cabin ${name}`}>
-              <CreateCabinForm cabinToEdit={cabin} />
-            </Modal.Window>
+                <Modal.Open opens='cabin-edit'>
+                  <Menu.Button icon={<HiOutlinePencilSquare />}>
+                    Edit
+                  </Menu.Button>
+                </Modal.Open>
+
+                <Modal.Open opens='cabin-delete'>
+                  <Menu.Button icon={<HiXMark />}>Delete</Menu.Button>
+                </Modal.Open>
+              </Menu.List>
+
+              <Modal.Window name='cabin-edit' title={`Edit cabin ${name}`}>
+                <CreateCabinForm cabinToEdit={cabin} />
+              </Modal.Window>
+
+              <Modal.Window name='cabin-delete' title={`Delete cabin ${name}`}>
+                <ConfirmDelete
+                  cabinName={name!}
+                  onConfirm={() => handleDelete(cabinId!)}
+                />
+              </Modal.Window>
+            </Menu.Content>
           </Modal>
-
-          <Modal>
-            <Modal.Open opens='cabin-delete'>
-              <Button>
-                <HiXMark />
-              </Button>
-            </Modal.Open>
-            <Modal.Window name='cabin-delete' title={`Delete cabin ${name}`}>
-              <ConfirmDelete
-                cabinName={name!}
-                onConfirm={() => handleDelete(cabinId!)}
-              />
-            </Modal.Window>
-          </Modal>
-
-          <Menu.Content>
-            <Menu.Toggle id={cabinId!} />
-            <Menu.List id={cabinId!}>
-              <Menu.Button>Duplicate</Menu.Button>
-              <Menu.Button>Add</Menu.Button>
-              <Menu.Button>Delete</Menu.Button>
-            </Menu.List>
-          </Menu.Content>
         </div>
       </Table.Row>
     </>
