@@ -1,16 +1,16 @@
 import { useSearchParams } from 'react-router-dom';
 import styles from './styles/TableFilters.module.css';
+import { Options } from '../features/cabins/CabinTableFilters';
 
 interface Props {
   filterField: string;
-  filterOptions: { label: string; value: string }[];
+  filterOptions: Options[];
 }
 
 function TableFilters({ filterField, filterOptions }: Props) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const currentFilter = searchParams.get(filterField) || filterOptions.at(0);
-  console.log(currentFilter);
 
   const handleClick = (value: string) => {
     searchParams.set(filterField, value);
@@ -18,15 +18,15 @@ function TableFilters({ filterField, filterOptions }: Props) {
   };
   return (
     <div className={styles.wrapper}>
-      {filterOptions.map((opt) => (
+      {filterOptions.map((option) => (
         <button
-          key={opt.value}
+          key={option.value}
           className={`${styles.filter} ${
-            currentFilter === opt.value && styles.active
+            currentFilter === option.value && styles.active
           }`}
-          onClick={() => handleClick(opt.value)}
+          onClick={() => handleClick(option.value)}
         >
-          {opt.label}
+          {option.label}
         </button>
       ))}
     </div>
