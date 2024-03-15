@@ -70,6 +70,7 @@
 
 body {
   font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
   color: var(--color-grey-700);
   transition: color 0.3s, background-color 0.3s;
 }
@@ -92,7 +93,6 @@ textarea,
 select,
 label {
   color: inherit;
-  font-size: 0.9rem;
 }
 
 textarea {

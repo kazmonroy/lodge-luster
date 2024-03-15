@@ -31,17 +31,24 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }: Props) {
 
   const onSubmit: SubmitHandler<Cabin> = (data) => {
     const imgUpload =
-      typeof data.image === 'string' ? data.image : data.image![0]!;
+      typeof data.image === 'string' ? data.image : data.image![0];
 
     if (isEditSession) {
-      editCabin({ newCabin: { ...data, image: imgUpload }, id: editId });
+      editCabin(
+        { newCabin: { ...data, image: imgUpload }, id: editId },
+        {
+          onSuccess: () => {
+            toast.success(`Cabin ${cabinToEdit.name} successfully edited!`);
+            onCloseModal?.();
+          },
+        }
+      );
     } else {
       createCabin(
         { ...data, image: imgUpload },
         {
-          onSuccess: (data) => {
-            console.log(data);
-            toast.success(`Cabin successfully created!`);
+          onSuccess: () => {
+            toast.success('Cabin successfully created!');
             reset();
             onCloseModal?.();
           },

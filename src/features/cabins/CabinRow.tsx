@@ -12,6 +12,7 @@ import {
   HiOutlinePencilSquare,
   HiXMark,
 } from 'react-icons/hi2';
+import Modal from '../../ui/Modal';
 
 interface Props {
   cabin: Cabin;
@@ -65,9 +66,17 @@ function CabinRow({ cabin }: Props) {
           <span>&mdash;</span>
         )}
         <div>
-          <Button onClick={() => setShowForm((prev) => !prev)}>
-            <HiOutlinePencilSquare />
-          </Button>
+          <Modal>
+            <Modal.Open opens='cabin-edit'>
+              <Button onClick={() => setShowForm((prev) => !prev)}>
+                <HiOutlinePencilSquare />
+              </Button>
+            </Modal.Open>
+
+            <Modal.Window name='cabin-edit' title={`Edit cabin ${name}`}>
+              <CreateCabinForm cabinToEdit={cabin} />
+            </Modal.Window>
+          </Modal>
 
           <Button onClick={() => handleDelete(cabinId!)}>
             <HiXMark />
@@ -77,7 +86,6 @@ function CabinRow({ cabin }: Props) {
           </Button>
         </div>
       </div>
-      {showForm && <CreateCabinForm cabinToEdit={cabin} />}
     </>
   );
 }

@@ -38,11 +38,10 @@
   &.small {
     padding: 0.5rem 0.8rem;
     text-align: center;
-    font-size: 0.9rem;
   }
 
   &.medium {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     padding: 1.2rem 1.6rem;
     font-weight: 500;
   }
