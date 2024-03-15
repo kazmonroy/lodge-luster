@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react';
 import styles from './styles/Table.module.css';
-import { Cabin } from '../services/types/collection';
+import { Booking, Cabin } from '../services/types/collection';
 interface Context {
   columns: string;
 }
@@ -11,8 +11,8 @@ interface TableProps {
 }
 
 interface BodyProps {
-  data: Cabin[];
-  render: (arg: Cabin) => JSX.Element;
+  data: Cabin[] | Booking[];
+  render: (arg: Cabin | Booking) => JSX.Element;
 }
 
 const TableContext = createContext<Context>({

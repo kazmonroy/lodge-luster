@@ -8,7 +8,6 @@ function Cabins() {
     <>
       <Row direction='horizontal'>
         <h2>All Cabins</h2>
-
         <Row direction='horizontal' gap={2}>
           <CabinTableFilters />
           <AddCabin />

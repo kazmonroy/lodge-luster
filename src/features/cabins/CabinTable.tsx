@@ -6,10 +6,6 @@ import CabinRow from './CabinRow';
 import Table from '../../ui/Table';
 import Menu from '../../ui/Menu';
 
-interface Obj {
-  field: keyof Cabin;
-  direction: string;
-}
 function CabinTable() {
   const { cabins, isLoading } = useCabins();
   const [searchParams] = useSearchParams();

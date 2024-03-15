@@ -1,0 +1,9 @@
+.stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  & span:last-child {
+    color: var(--color-grey-400);
+  }
+}

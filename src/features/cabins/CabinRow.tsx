@@ -15,14 +15,10 @@ import ConfirmDelete from '../../ui/ConfirmDelete';
 import Table from '../../ui/Table';
 import Menu from '../../ui/Menu';
 
-interface Props {
-  cabin: Cabin;
-}
-
 const emptyCabin =
   'https://wgjzrjfkwsremzyxnsxm.supabase.co/storage/v1/object/public/cabin-images/cabin-empty.png';
 
-function CabinRow({ cabin }: Props) {
+function CabinRow({ cabin }: { cabin: Cabin }) {
   const {
     id: cabinId,
     name,
