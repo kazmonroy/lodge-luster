@@ -1,3 +1,4 @@
+import { ReactElement } from 'react';
 import styles from './styles/Tag.module.css';
 
 function Tag({ type, children }: { type: string; children: string }) {

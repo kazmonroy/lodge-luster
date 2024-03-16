@@ -33,12 +33,10 @@ function CabinTableFilters() {
     { value: 'maxCapacity-desc', label: 'Sort by capacity (high first)' },
   ];
   return (
-    <>
-      <Row direction='horizontal' gap={2}>
-        <TableFilters filterField={filterField} filterOptions={filterOptions} />
-        <SortBy sortByOptions={sortByOptions} />
-      </Row>
-    </>
+    <Row direction='horizontal' gap={2}>
+      <TableFilters filterField={filterField} filterOptions={filterOptions} />
+      <SortBy sortByOptions={sortByOptions} />
+    </Row>
   );
 }
 

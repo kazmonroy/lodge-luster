@@ -23,7 +23,7 @@
   display: grid;
   column-gap: 2.4rem;
   align-items: center;
-  padding: 0.5rem 2rem;
+  padding: 1rem 2.5rem;
 
   &:not(:last-child) {
     border-bottom: 1px solid var(--color-grey-100);
@@ -36,6 +36,7 @@
     object-fit: cover;
     object-position: center;
     transform: scale(1.5) translateX(-7px);
+    border-radius: 0.2rem;
   }
 
   .price,

@@ -25,11 +25,14 @@ function BookingRow({ booking }: { booking: Booking }) {
   } = booking;
 
   if (!booking) return <Spinner />;
-  const statusToTagName: { [field: keyof Booking]: string } = {
+
+  const statusToTagName: { [field: string]: string } = {
     unconfirmed: 'blue',
     'checked-in': 'green',
     'checked-out': 'silver',
   };
+
+  const amountSyle = { fontFamily: 'Sono, monospace', textAlign: 'right' };
 
   return (
     <>
@@ -51,8 +54,8 @@ function BookingRow({ booking }: { booking: Booking }) {
             {format(new Date(endDate!), 'MMM dd yyyy')}
           </span>
         </StackedCell>
-        <Tag type={statusToTagName[status]}>{status}</Tag>
-        <div>{formatCurrency(totalPrice!)}</div>
+        <Tag type={statusToTagName[status!]}>{status!}</Tag>
+        <div style={amountSyle}>{formatCurrency(totalPrice!)}</div>
         {/* <div className={styles.price}>{formatCurrency(regularPrice!)}</div>
         {discount ? (
           <div className={styles.discount}>{formatCurrency(discount)}</div>
