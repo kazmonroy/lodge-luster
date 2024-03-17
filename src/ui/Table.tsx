@@ -60,8 +60,8 @@ function Body({ data, render }: BodyProps) {
   return <section>{data.map(render)}</section>;
 }
 
-function Footer() {
-  return <div></div>;
+function Footer({ children }: { children: JSX.Element }) {
+  return <div className={styles.footer}>{children}</div>;
 }
 
 Table.Header = Header;
