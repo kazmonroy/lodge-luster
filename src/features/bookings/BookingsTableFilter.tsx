@@ -30,7 +30,7 @@ function BookingsTableFilter() {
 
   const sortByOptions: Options[] = [
     { value: 'startDate-asc', label: 'Sort by Date (recent first)' },
-    { value: 'startDate-desc', label: 'Sort by Date (older first)' },
+    { value: 'startDate-desc', label: 'Sort by Date (earlier first)' },
     { value: 'status-asc', label: 'Sort by Status (A-Z)' },
     { value: 'status-desc', label: 'Sort by Status (Z-A)' },
     { value: 'totalPrice-asc', label: 'Sort by Amount (low first)' },
