@@ -5,15 +5,15 @@ import Row from './Row';
 interface Props {
   onCloseModal?: () => void;
   onConfirm: () => void;
-  cabinName: string;
+  itemName: string | number;
 }
 
-function ConfirmDelete({ onCloseModal, onConfirm, cabinName }: Props) {
+function ConfirmDelete({ onCloseModal, onConfirm, itemName }: Props) {
   return (
     <div>
       <Row>
         <p>
-          This will permanently delete {cabinName}'s information. This action
+          This will permanently delete {itemName}'s information. This action
           cannot be undone.
         </p>
       </Row>

@@ -89,7 +89,7 @@ function CabinRow({ cabin }: { cabin: Cabin }) {
 
               <Modal.Window name='cabin-delete' title={`Delete cabin ${name}`}>
                 <ConfirmDelete
-                  cabinName={name!}
+                  itemName={name!}
                   onConfirm={() => handleDelete(cabinId!)}
                 />
               </Modal.Window>

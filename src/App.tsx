@@ -10,6 +10,7 @@ import Dashboard from './pages/Dashboard';
 import ErrorPage from './pages/ErrorPage';
 import Users from './pages/Users';
 import Settings from './pages/Settings';
+import SingleBooking from './pages/SingleBooking';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
           {
             path: 'bookings',
             element: <Bookings />,
+          },
+          {
+            path: 'bookings/:bookingId',
+            element: <SingleBooking />,
           },
           {
             path: 'cabins',

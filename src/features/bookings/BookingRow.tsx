@@ -1,10 +1,20 @@
-import Table from '../../ui/Table';
 import { Booking } from '../../services/types/collection';
-import StackedCell from '../../ui/StackedCell';
-import Tag from '../../ui/Tag';
 import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers';
 import { format, isToday } from 'date-fns';
+import {
+  HiArrowRightOnRectangle,
+  HiOutlineIdentification,
+  HiXMark,
+} from 'react-icons/hi2';
+import { useNavigate } from 'react-router-dom';
+
+import Table from '../../ui/Table';
+import StackedCell from '../../ui/StackedCell';
+import Tag from '../../ui/Tag';
+import ConfirmDelete from '../../ui/ConfirmDelete';
 import Spinner from '../../ui/Spinner';
+import Modal from '../../ui/Modal';
+import Menu from '../../ui/Menu';
 
 function BookingRow({ booking }: { booking: Booking }) {
   const {
@@ -23,6 +33,8 @@ function BookingRow({ booking }: { booking: Booking }) {
     hasBreakfast,
     isPaid,
   } = booking;
+
+  const Navigate = useNavigate();
 
   if (!booking) return <Spinner />;
 
@@ -56,48 +68,43 @@ function BookingRow({ booking }: { booking: Booking }) {
         </StackedCell>
         <Tag type={statusToTagName[status!]}>{status!}</Tag>
         <div style={amountSyle}>{formatCurrency(totalPrice!)}</div>
-        {/* <div className={styles.price}>{formatCurrency(regularPrice!)}</div>
-        {discount ? (
-          <div className={styles.discount}>{formatCurrency(discount)}</div>
-        ) : (
-          <span>&mdash;</span>
-        )} */}
-        {/* <div>
-        <Modal>
-          <Menu.Content>
-            <Menu.Toggle id={cabinId!} />
-            <Menu.List id={cabinId!}>
-              <Menu.Button
-                icon={<HiOutlineClipboardDocument />}
-                onClick={() => handleDuplicate()}
-              >
-                Duplicate
-              </Menu.Button>
+        {/* <div className={styles.price}>{formatCurrency(regularPrice!)}</div> */}
 
-              <Modal.Open opens='cabin-edit'>
-                <Menu.Button icon={<HiOutlinePencilSquare />}>
-                  Edit
+        <div>
+          <Modal>
+            <Menu.Content>
+              <Menu.Toggle id={bookingId!} />
+              <Menu.List id={bookingId!}>
+                <Menu.Button
+                  icon={<HiOutlineIdentification />}
+                  onClick={() => Navigate(`/bookings/${bookingId}`)}
+                >
+                  See details
                 </Menu.Button>
-              </Modal.Open>
 
-              <Modal.Open opens='cabin-delete'>
-                <Menu.Button icon={<HiXMark />}>Delete</Menu.Button>
-              </Modal.Open>
-            </Menu.List>
+                <Modal.Open opens='cabin-edit'>
+                  <Menu.Button icon={<HiArrowRightOnRectangle />}>
+                    Check in
+                  </Menu.Button>
+                </Modal.Open>
 
-            <Modal.Window name='cabin-edit' title={`Edit cabin ${name}`}>
-              <CreateCabinForm cabinToEdit={cabin} />
-            </Modal.Window>
+                <Modal.Open opens='cabin-delete'>
+                  <Menu.Button icon={<HiXMark />}>Delete booking</Menu.Button>
+                </Modal.Open>
+              </Menu.List>
 
-            <Modal.Window name='cabin-delete' title={`Delete cabin ${name}`}>
-              <ConfirmDelete
-                cabinName={name!}
-                onConfirm={() => handleDelete(cabinId!)}
-              />
-            </Modal.Window>
-          </Menu.Content>
-        </Modal>
-      </div> */}
+              <Modal.Window
+                name='cabin-delete'
+                title={`Delete booking ${bookingId}`}
+              >
+                <ConfirmDelete
+                  itemName={bookingId!}
+                  onConfirm={() => console.log(bookingId!)}
+                />
+              </Modal.Window>
+            </Menu.Content>
+          </Modal>
+        </div>
       </Table.Row>
     </>
   );
