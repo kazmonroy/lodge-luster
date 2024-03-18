@@ -1,12 +1,12 @@
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi2';
 import styles from './styles/Pagination.module.css';
 import { useSearchParams } from 'react-router-dom';
+import { PAGE_SIZE } from '../utils/constants';
 
 interface Props {
   count: number;
 }
 
-const PAGE_SIZE = 10;
 function Pagination({ count }: Props) {
   const [searchParams, setSearchParams] = useSearchParams();
   const pageCount = Math.ceil(count / PAGE_SIZE);
@@ -27,11 +27,15 @@ function Pagination({ count }: Props) {
     setSearchParams(searchParams);
   };
 
+  if (pageCount <= 1) return null;
   return (
     <div className={styles.pagination}>
       <p>
-        Showing <span>1</span> to <span>10</span> of <span>{count}</span>{' '}
-        results
+        Showing <span>{(currentPage - 1) * PAGE_SIZE + 1}</span> to{' '}
+        <span>
+          {currentPage === pageCount ? count : currentPage * PAGE_SIZE}
+        </span>{' '}
+        of <span>{count}</span> results
       </p>
 
       <div className={styles.buttons}>
