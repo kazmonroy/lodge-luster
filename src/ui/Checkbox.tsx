@@ -3,7 +3,7 @@ import styles from './styles/Checkbox.module.css';
 interface Props {
   checked: boolean;
   onChange: () => void;
-  disabled: boolean;
+  disabled?: boolean;
   id: string;
   children: JSX.Element;
 }

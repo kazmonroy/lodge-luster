@@ -24,15 +24,10 @@ function BookingRow({ booking }: { booking: Booking }) {
     id: bookingId,
     status,
     totalPrice,
-    created_at,
+
     startDate,
     endDate,
     numNights,
-    numGuests,
-    cabinPrice,
-    extrasPrice,
-    hasBreakfast,
-    isPaid,
   } = booking;
 
   const Navigate = useNavigate();
@@ -45,7 +40,7 @@ function BookingRow({ booking }: { booking: Booking }) {
     'checked-out': 'silver',
   };
 
-  const amountSyle = { fontFamily: 'Sono, monospace', textAlign: 'right' };
+  const amountSyle = { fontFamily: 'Sono, monospace', 'text-align': 'right' };
 
   return (
     <>
@@ -69,7 +64,6 @@ function BookingRow({ booking }: { booking: Booking }) {
         </StackedCell>
         <Tag type={statusToTagName[status!]}>{status!}</Tag>
         <div style={amountSyle}>{formatCurrency(totalPrice!)}</div>
-        {/* <div className={styles.price}>{formatCurrency(regularPrice!)}</div> */}
 
         <div>
           <Modal>
@@ -96,7 +90,7 @@ function BookingRow({ booking }: { booking: Booking }) {
                   {status === 'checked-in' && (
                     <Menu.Button
                       icon={<HiArrowLeftOnRectangle />}
-                      onClick={() => console.log('checkout')}
+                      onClick={() => console.log('checked out')}
                     >
                       Check out
                     </Menu.Button>
@@ -109,10 +103,10 @@ function BookingRow({ booking }: { booking: Booking }) {
                 >
                   Check in
                 </Menu.Button> */}
-                {/* 
+
                 <Modal.Open opens='cabin-delete'>
                   <Menu.Button icon={<HiXMark />}>Delete booking</Menu.Button>
-                </Modal.Open> */}
+                </Modal.Open>
               </Menu.List>
 
               <Modal.Window

@@ -1,6 +1,5 @@
 import { PAGE_SIZE } from '../utils/constants';
 import { supabase } from './supabase-client';
-import { Booking } from './types/collection';
 
 interface BookingsProps {
   filter: { field: string; value: string } | null;
@@ -57,7 +56,12 @@ export async function getBooking(id: string) {
 
 export async function updateBooking(
   id: string,
-  obj: { status: string; isPaid: boolean }
+  obj: {
+    status: string;
+    isPaid: boolean;
+    extrasPrice?: number;
+    totalPrice?: number;
+  }
 ) {
   const { data, error } = await supabase
     .from('bookings')
