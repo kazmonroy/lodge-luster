@@ -43,7 +43,7 @@ function LoginForm() {
         />
       </FormRow>
 
-      <Button size='medium'>
+      <Button size='medium' type='submit'>
         {!isLoading ? 'Log in to your account' : <SpinnerMini />}
       </Button>
     </form>
