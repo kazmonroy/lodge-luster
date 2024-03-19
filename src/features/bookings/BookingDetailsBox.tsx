@@ -10,7 +10,7 @@ import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers';
 import DataItem from '../../ui/DataItem';
 import { Booking } from '../../services/types/collection';
 
-function BookingDetailsBox({ booking = {} }) {
+function BookingDetailsBox({ booking = {} }: { booking: Booking }) {
   const {
     created_at,
     startDate,

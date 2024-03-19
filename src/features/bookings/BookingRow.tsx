@@ -2,6 +2,7 @@ import { Booking } from '../../services/types/collection';
 import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers';
 import { format, isToday } from 'date-fns';
 import {
+  HiArrowLeftOnRectangle,
   HiArrowRightOnRectangle,
   HiOutlineIdentification,
   HiXMark,
@@ -81,16 +82,37 @@ function BookingRow({ booking }: { booking: Booking }) {
                 >
                   See details
                 </Menu.Button>
+                <>
+                  {status === 'unconfirmed' && (
+                    <Menu.Button
+                      icon={<HiArrowRightOnRectangle />}
+                      onClick={() => Navigate(`/checkin/${bookingId}`)}
+                    >
+                      Check in
+                    </Menu.Button>
+                  )}
+                </>
+                <>
+                  {status === 'checked-in' && (
+                    <Menu.Button
+                      icon={<HiArrowLeftOnRectangle />}
+                      onClick={() => console.log('checkout')}
+                    >
+                      Check out
+                    </Menu.Button>
+                  )}
+                </>
 
-                <Modal.Open opens='cabin-edit'>
-                  <Menu.Button icon={<HiArrowRightOnRectangle />}>
-                    Check in
-                  </Menu.Button>
-                </Modal.Open>
-
+                {/* <Menu.Button
+                  icon={<HiArrowRightOnRectangle />}
+                  onClick={() => Navigate(`/checkin/${bookingId}`)}
+                >
+                  Check in
+                </Menu.Button> */}
+                {/* 
                 <Modal.Open opens='cabin-delete'>
                   <Menu.Button icon={<HiXMark />}>Delete booking</Menu.Button>
-                </Modal.Open>
+                </Modal.Open> */}
               </Menu.List>
 
               <Modal.Window

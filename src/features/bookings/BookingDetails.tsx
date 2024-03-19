@@ -5,7 +5,7 @@ import Tag from '../../ui/Tag';
 import Modal from '../../ui/Modal';
 import Button from '../../ui/Button';
 import ConfirmDelete from '../../ui/ConfirmDelete';
-import { HiArrowUpOnSquare } from 'react-icons/hi2';
+
 import styles from './styles/BookingDetails.module.css';
 import useBooking from './hooks/useBooking';
 import { useMoveBack } from '../../hooks/useMoveBack';

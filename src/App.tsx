@@ -11,6 +11,7 @@ import ErrorPage from './pages/ErrorPage';
 import Users from './pages/Users';
 import Settings from './pages/Settings';
 import SingleBooking from './pages/SingleBooking';
+import CheckIn from './pages/CheckIn';
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
           {
             path: 'bookings/:bookingId',
             element: <SingleBooking />,
+          },
+          {
+            path: 'checkin/:bookingId',
+            element: <CheckIn />,
           },
           {
             path: 'cabins',
