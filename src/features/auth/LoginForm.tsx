@@ -3,23 +3,17 @@ import SpinnerMini from '../../ui/SpinnerMini';
 import FormRow from '../../ui/FormRow';
 import Button from '../../ui/Button';
 import styles from '../../ui/styles/Form.module.css';
+import { login } from '../../services/apiAuth';
 function LoginForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   //   const { login, isLoading } = useLogin();
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    //   if (!email || !password) return;
-    //   login(
-    //     { email, password },
-    //     {
-    //       onSettled: () => {
-    //         setEmail('');
-    //         setPassword('');
-    //       },
-    //     }
-    //   );
+    if (!email || !password) return;
+
+    login({ email, password });
   }
 
   return (
