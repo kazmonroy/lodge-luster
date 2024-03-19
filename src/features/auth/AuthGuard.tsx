@@ -10,7 +10,6 @@ interface Props {
 function AuthGuard({ children }: Props) {
   const navigate = useNavigate();
   const { isLoading, isAuthenticated } = useUser();
-  console.log(isAuthenticated);
 
   useEffect(() => {
     if (!isAuthenticated && !isLoading) navigate('/login');
