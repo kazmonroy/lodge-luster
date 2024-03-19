@@ -9,26 +9,20 @@ import BookingDetailsBox from '../bookings/BookingDetailsBox';
 import Checkbox from '../../ui/Checkbox';
 import { useEffect, useState } from 'react';
 import { formatCurrency } from '../../utils/helpers';
+import { useCheckin } from './hooks/useCheckin';
 
 function CheckInBooking() {
   const { booking = {}, isLoading } = useBooking();
+  const { checkin, isCheckingIn } = useCheckin();
   const {
     status,
     id: bookingId,
     isPaid,
     totalPrice,
-    guests: {
-      fullName: guestName,
-      email,
-      country,
-      countryFlag,
-      nationalID,
-    } = {},
+    guests: { fullName: guestName } = {},
   } = booking;
 
   const [confirmPaid, setConfirmPaid] = useState<boolean>(false);
-  //   const { checkout, isCheckingOut } = useCheckout();
-  //   const { deleteBooking, isDeleting } = useDeleteBooking();
 
   const moveBack = useMoveBack();
 
@@ -38,6 +32,10 @@ function CheckInBooking() {
 
   if (isLoading) return <Spinner />;
   if (!booking) return <p>No bookings at the moment</p>;
+
+  const handleCheckIn = () => {
+    !confirmPaid ? '' : checkin(bookingId);
+  };
 
   const statusToTagName = {
     unconfirmed: 'blue',
@@ -76,7 +74,7 @@ function CheckInBooking() {
       </div>
 
       <div className={styles.buttonsGroup}>
-        <Button onClick={() => console.log('checkin')} disabled={!confirmPaid}>
+        <Button onClick={handleCheckIn} disabled={!confirmPaid || isCheckingIn}>
           Check in booking {bookingId}
         </Button>
       </div>

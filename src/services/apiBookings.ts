@@ -1,5 +1,6 @@
 import { PAGE_SIZE } from '../utils/constants';
 import { supabase } from './supabase-client';
+import { Booking } from './types/collection';
 
 interface BookingsProps {
   filter: { field: string; value: string } | null;
@@ -49,6 +50,24 @@ export async function getBooking(id: string) {
   if (error) {
     console.error(error);
     throw new Error('Booking could not be loaded');
+  }
+
+  return data;
+}
+
+export async function updateBooking(
+  id: string,
+  obj: { status: string; isPaid: boolean }
+) {
+  const { data, error } = await supabase
+    .from('bookings')
+    .update(obj)
+    .eq('id', id)
+    .select();
+
+  if (error) {
+    console.error(error);
+    throw new Error('Booking could not be updated');
   }
 
   return data;

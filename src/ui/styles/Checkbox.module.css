@@ -1,10 +1,10 @@
 .checkbox {
   display: flex;
-  gap: 1.6rem;
+  gap: 1rem;
 
   & input[type='checkbox'] {
-    height: 2.4rem;
-    width: 2.4rem;
+    height: 1.2rem;
+    width: 1.2rem;
     outline-offset: 2px;
     transform-origin: 0;
     accent-color: var(--color-brand-600);
