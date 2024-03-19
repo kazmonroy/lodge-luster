@@ -9,7 +9,7 @@ export function useLogin() {
     mutationFn: loginApi,
     onSuccess: (user) => {
       console.log(user);
-      toast.success('Logged in!'), navigate('/');
+      toast.success('Logged in!'), navigate('/', { replace: true });
     },
     onError: () => toast.error('Provided email or password are incorrect'),
   });
