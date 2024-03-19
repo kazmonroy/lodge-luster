@@ -5,7 +5,7 @@ import {
   HiArrowLeftOnRectangle,
   HiArrowRightOnRectangle,
   HiOutlineIdentification,
-  HiXMark,
+  HiOutlineTrash,
 } from 'react-icons/hi2';
 import { useNavigate } from 'react-router-dom';
 import { useCheckout } from '../check-in-out/hooks/useCheckout';
@@ -108,7 +108,9 @@ function BookingRow({ booking }: { booking: Booking }) {
                 </>
 
                 <Modal.Open opens='booking-delete'>
-                  <Menu.Button icon={<HiXMark />}>Delete booking</Menu.Button>
+                  <Menu.Button icon={<HiOutlineTrash />}>
+                    Delete booking
+                  </Menu.Button>
                 </Modal.Open>
               </Menu.List>
 
