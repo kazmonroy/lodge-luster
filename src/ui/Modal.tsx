@@ -40,7 +40,7 @@ const ModalContext = createContext<Context>({
   close: () => {},
 });
 
-function Modal({ children }: { children: JSX.Element }) {
+function Modal({ children }: { children: JSX.Element | JSX.Element[] }) {
   const [openName, setOpenName] = useState<string>('');
   const close = () => setOpenName('');
   const open = setOpenName;

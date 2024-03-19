@@ -1,0 +1,11 @@
+.headingGroup {
+  display: flex;
+  gap: 2.4rem;
+  align-items: center;
+}
+
+.buttonsGroup {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: flex-end;
+}

@@ -3,11 +3,12 @@ import styles from './styles/Button.module.css';
 
 interface Props {
   size?: 'small' | 'medium';
-  style?: 'primary' | 'secondary' | 'danger';
+  style?: 'primary' | 'secondary' | 'text' | 'danger';
   children: ReactNode;
   type?: 'button' | 'submit' | 'reset' | undefined;
   disabled?: boolean;
   onClick?: () => void;
+  icon?: JSX.Element;
 }
 function Button({
   size = 'small',
@@ -16,6 +17,7 @@ function Button({
   type,
   disabled,
   onClick,
+  icon,
 }: Props) {
   return (
     <button
@@ -24,7 +26,8 @@ function Button({
       onClick={onClick}
       disabled={disabled}
     >
-      {children}
+      {icon}
+      <span>{children}</span>
     </button>
   );
 }

@@ -6,9 +6,10 @@ interface Props {
   onCloseModal?: () => void;
   onConfirm: () => void;
   itemName: string | number;
+  disabled?: boolean;
 }
 
-function ConfirmDelete({ onCloseModal, onConfirm, itemName }: Props) {
+function ConfirmDelete({ onCloseModal, onConfirm, itemName, disabled }: Props) {
   return (
     <div>
       <Row>
@@ -20,7 +21,7 @@ function ConfirmDelete({ onCloseModal, onConfirm, itemName }: Props) {
 
       <FormRow>
         <>
-          <Button style='secondary' onClick={onCloseModal}>
+          <Button style='secondary' onClick={onCloseModal} disabled={disabled}>
             Cancel
           </Button>
           <Button style='danger' onClick={onConfirm}>

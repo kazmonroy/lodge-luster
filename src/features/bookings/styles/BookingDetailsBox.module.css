@@ -1,0 +1,93 @@
+.detailsBox {
+  background-color: var(--color-grey-0);
+  border: 1px solid var(--color-grey-100);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+}
+
+.detailsHeader {
+  background-color: var(--color-brand-500);
+  padding: 1.5rem;
+  color: var(--color-grey-50);
+  font-size: 1rem;
+  /* font-weight: 500; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  svg {
+    height: 3rem;
+    width: 3rem;
+  }
+
+  & div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    font-weight: 600;
+  }
+
+  & span {
+    font-family: 'Sono', monospace;
+
+    margin-left: 4px;
+  }
+}
+
+.mainSection {
+  padding: 2rem 1.5rem;
+}
+
+.guest {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1.6rem;
+  color: var(--color-grey-500);
+
+  & p:first-of-type {
+    font-weight: 500;
+    color: var(--color-grey-700);
+  }
+}
+
+.detailsFooter {
+  padding: 1.6rem 4rem;
+
+  color: var(--color-grey-500);
+  text-align: right;
+}
+
+.flag {
+  max-width: 2rem;
+  border-radius: var(--border-radius-tiny);
+  display: block;
+  border: 1px solid var(--color-grey-100);
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  border-radius: var(--border-radius-sm);
+  margin-top: 2.4rem;
+  background-color: var(--color-yellow-100);
+  color: var(--color-yellow-700);
+
+  &.isPaid {
+    background-color: var(--color-green-100);
+    color: var(--color-green-700);
+  }
+
+  & p:last-child {
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  svg {
+    height: 2.4rem;
+    width: 2.4rem;
+    color: currentColor !important;
+  }
+}

@@ -24,6 +24,16 @@
     }
   }
 
+  &.text {
+    color: var(--color-brand-600);
+    background: transparent;
+    box-shadow: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
   &.danger {
     color: var(--color-red-100);
     background-color: var(--color-red-700);
