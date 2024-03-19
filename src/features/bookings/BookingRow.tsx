@@ -8,6 +8,8 @@ import {
   HiXMark,
 } from 'react-icons/hi2';
 import { useNavigate } from 'react-router-dom';
+import { useCheckout } from '../check-in-out/hooks/useCheckout';
+import { useDeleteBooking } from './hooks/useDeleteBooking';
 
 import Table from '../../ui/Table';
 import StackedCell from '../../ui/StackedCell';
@@ -16,17 +18,16 @@ import ConfirmDelete from '../../ui/ConfirmDelete';
 import Spinner from '../../ui/Spinner';
 import Modal from '../../ui/Modal';
 import Menu from '../../ui/Menu';
-import { useCheckout } from '../check-in-out/hooks/useCheckout';
 
 function BookingRow({ booking }: { booking: Booking }) {
   const { checkout } = useCheckout();
+  const { deleteBooking, isDeletingBooking } = useDeleteBooking();
   const {
     cabins: { name: cabinName },
     guests: { fullName, email },
     id: bookingId,
     status,
     totalPrice,
-
     startDate,
     endDate,
     numNights,
@@ -38,6 +39,10 @@ function BookingRow({ booking }: { booking: Booking }) {
 
   const handleCheckout = () => {
     checkout({ bookingId });
+  };
+
+  const handleDeleteBooking = () => {
+    deleteBooking(bookingId);
   };
 
   const statusToTagName: { [field: string]: string } = {
@@ -102,25 +107,19 @@ function BookingRow({ booking }: { booking: Booking }) {
                   )}
                 </>
 
-                {/* <Menu.Button
-                  icon={<HiArrowRightOnRectangle />}
-                  onClick={() => Navigate(`/checkin/${bookingId}`)}
-                >
-                  Check in
-                </Menu.Button> */}
-
-                <Modal.Open opens='cabin-delete'>
+                <Modal.Open opens='booking-delete'>
                   <Menu.Button icon={<HiXMark />}>Delete booking</Menu.Button>
                 </Modal.Open>
               </Menu.List>
 
               <Modal.Window
-                name='cabin-delete'
+                name='booking-delete'
                 title={`Delete booking ${bookingId}`}
               >
                 <ConfirmDelete
                   itemName={bookingId!}
-                  onConfirm={() => console.log(bookingId!)}
+                  onConfirm={handleDeleteBooking}
+                  disabled={isDeletingBooking}
                 />
               </Modal.Window>
             </Menu.Content>

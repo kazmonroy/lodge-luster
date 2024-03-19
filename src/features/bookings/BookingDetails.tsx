@@ -11,9 +11,12 @@ import useBooking from './hooks/useBooking';
 import { useMoveBack } from '../../hooks/useMoveBack';
 import BookingDetailsBox from './BookingDetailsBox';
 import { useCheckout } from '../check-in-out/hooks/useCheckout';
+import { useDeleteBooking } from './hooks/useDeleteBooking';
+
 function BookingDetails() {
   const { booking, isLoading } = useBooking();
   const { checkout } = useCheckout();
+  const { deleteBooking, isDeletingBooking } = useDeleteBooking();
 
   const moveBack = useMoveBack();
   const navigate = useNavigate();
@@ -31,6 +34,11 @@ function BookingDetails() {
 
   const handleCheckout = () => {
     checkout({ bookingId });
+  };
+  const handleDeleteBooking = () => {
+    deleteBooking(bookingId, {
+      onSettled: () => navigate(-1),
+    });
   };
 
   return (
@@ -53,16 +61,12 @@ function BookingDetails() {
             <Button style='danger'>Delete booking</Button>
           </Modal.Open>
 
-          <Modal.Window name='delete' title='Delete'>
-            {/* <ConfirmDelete
+          <Modal.Window name='delete' title={`Delete Booking ${bookingId}`}>
+            <ConfirmDelete
               itemName='booking'
-              disabled={isDeleting}
-              onConfirm={() =>
-                deleteBooking(bookingId, {
-                  onSettled: () => navigate(-1),
-                })
-              }
-            /> */}
+              disabled={isDeletingBooking}
+              onConfirm={handleDeleteBooking}
+            />
           </Modal.Window>
         </Modal>
         {status === 'unconfirmed' && (
