@@ -9,7 +9,7 @@ export function useUrl() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleUrlEvent = ({ field, value }: Props) => {
-    if (searchParams.get('page') !== null) {
+    if (searchParams.get('page')) {
       searchParams.set('page', '1');
       setSearchParams(searchParams);
     }

@@ -19,7 +19,7 @@ import Menu from '../../ui/Menu';
 import { useCheckout } from '../check-in-out/hooks/useCheckout';
 
 function BookingRow({ booking }: { booking: Booking }) {
-  const { checkout, isCheckingOut } = useCheckout();
+  const { checkout } = useCheckout();
   const {
     cabins: { name: cabinName },
     guests: { fullName, email },
@@ -45,7 +45,7 @@ function BookingRow({ booking }: { booking: Booking }) {
     'checked-in': 'green',
     'checked-out': 'silver',
   };
-  const amountSyle = { fontFamily: 'Sono, monospace', 'text-align': 'right' };
+  const amountSyle = { fontFamily: 'Sono, monospace', textAlign: 'right' };
 
   return (
     <>

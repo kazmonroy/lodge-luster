@@ -99,7 +99,8 @@ function CheckInBooking() {
           }}
         >
           <span>
-            Want to add breakfast for {formatCurrency(optionalBreakfastPrice!)}
+            Want to add breakfast for
+            <span> {formatCurrency(optionalBreakfastPrice!)}?</span>
           </span>
         </Checkbox>
       </div>

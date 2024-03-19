@@ -10,10 +10,10 @@ import styles from './styles/BookingDetails.module.css';
 import useBooking from './hooks/useBooking';
 import { useMoveBack } from '../../hooks/useMoveBack';
 import BookingDetailsBox from './BookingDetailsBox';
+import { useCheckout } from '../check-in-out/hooks/useCheckout';
 function BookingDetails() {
   const { booking, isLoading } = useBooking();
-  //   const { checkout, isCheckingOut } = useCheckout();
-  //   const { deleteBooking, isDeleting } = useDeleteBooking();
+  const { checkout } = useCheckout();
 
   const moveBack = useMoveBack();
   const navigate = useNavigate();
@@ -27,6 +27,10 @@ function BookingDetails() {
     unconfirmed: 'blue',
     'checked-in': 'green',
     'checked-out': 'silver',
+  };
+
+  const handleCheckout = () => {
+    checkout({ bookingId });
   };
 
   return (
@@ -67,7 +71,9 @@ function BookingDetails() {
           </Button>
         )}
 
-        {status === 'checked-in' && <Button>Check out</Button>}
+        {status === 'checked-in' && (
+          <Button onClick={handleCheckout}>Check out</Button>
+        )}
       </div>
     </>
   );
