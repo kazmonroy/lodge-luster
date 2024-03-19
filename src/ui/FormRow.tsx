@@ -5,10 +5,11 @@ interface Props {
   label?: string;
   error?: string;
   children: JSX.Element;
+  direction?: 'row' | 'vertical';
 }
-function FormRow({ label, error, children }: Props) {
+function FormRow({ label, error, children, direction = 'row' }: Props) {
   return (
-    <div className={styles.formRow}>
+    <div className={direction === 'row' ? styles.formRow : styles.formVertical}>
       {label && <Label htmlFor={children!.props.id} label={label} />}
       {children}
       {error && <span className={styles.error}>{error}</span>}

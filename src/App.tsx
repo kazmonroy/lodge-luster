@@ -12,6 +12,7 @@ import Users from './pages/Users';
 import Settings from './pages/Settings';
 import SingleBooking from './pages/SingleBooking';
 import CheckIn from './pages/CheckIn';
+import Login from './pages/Login';
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
         ],
       },
     ],
+  },
+  {
+    path: '/login',
+    element: <Login />,
   },
 ]);
 
