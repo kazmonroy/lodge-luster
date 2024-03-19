@@ -5,7 +5,6 @@ function Login() {
   return (
     <main className={styles.loginLayout}>
       <Logo />
-      <h2>Log in to your account</h2>
       <LoginForm />
     </main>
   );

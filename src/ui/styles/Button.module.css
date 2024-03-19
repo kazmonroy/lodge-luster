@@ -51,8 +51,7 @@
   }
 
   &.medium {
-    font-size: 1rem;
-    padding: 1rem 1.6rem;
+    padding: 0.625rem 1rem;
     font-weight: 500;
   }
 
