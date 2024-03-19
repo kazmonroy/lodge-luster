@@ -16,8 +16,10 @@ import ConfirmDelete from '../../ui/ConfirmDelete';
 import Spinner from '../../ui/Spinner';
 import Modal from '../../ui/Modal';
 import Menu from '../../ui/Menu';
+import { useCheckout } from '../check-in-out/hooks/useCheckout';
 
 function BookingRow({ booking }: { booking: Booking }) {
+  const { checkout, isCheckingOut } = useCheckout();
   const {
     cabins: { name: cabinName },
     guests: { fullName, email },
@@ -34,12 +36,15 @@ function BookingRow({ booking }: { booking: Booking }) {
 
   if (!booking) return <Spinner />;
 
+  const handleCheckout = () => {
+    checkout({ bookingId });
+  };
+
   const statusToTagName: { [field: string]: string } = {
     unconfirmed: 'blue',
     'checked-in': 'green',
     'checked-out': 'silver',
   };
-
   const amountSyle = { fontFamily: 'Sono, monospace', 'text-align': 'right' };
 
   return (
@@ -90,7 +95,7 @@ function BookingRow({ booking }: { booking: Booking }) {
                   {status === 'checked-in' && (
                     <Menu.Button
                       icon={<HiArrowLeftOnRectangle />}
-                      onClick={() => console.log('checked out')}
+                      onClick={handleCheckout}
                     >
                       Check out
                     </Menu.Button>

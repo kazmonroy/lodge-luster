@@ -55,10 +55,10 @@ export async function getBooking(id: string) {
 }
 
 export async function updateBooking(
-  id: string,
+  id: string | number,
   obj: {
     status: string;
-    isPaid: boolean;
+    isPaid?: boolean;
     extrasPrice?: number;
     totalPrice?: number;
   }

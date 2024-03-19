@@ -34,9 +34,7 @@ function BookingDetails() {
       <Row direction='horizontal'>
         <div className={styles.headingGroup}>
           <h1>Booking #{bookingId}</h1>
-          <Tag type={statusToTagName['unconfirmed']}>
-            {status!.replace('-', ' ')}
-          </Tag>
+          <Tag type={statusToTagName[status]}>{status!.replace('-', ' ')}</Tag>
         </div>
         <Button style='text' onClick={moveBack}>
           &larr; Back
