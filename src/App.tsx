@@ -13,11 +13,16 @@ import Settings from './pages/Settings';
 import SingleBooking from './pages/SingleBooking';
 import CheckIn from './pages/CheckIn';
 import Login from './pages/Login';
+import AuthGuard from './features/auth/AuthGuard';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <AppLayout />,
+    element: (
+      <AuthGuard>
+        <AppLayout />
+      </AuthGuard>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {
