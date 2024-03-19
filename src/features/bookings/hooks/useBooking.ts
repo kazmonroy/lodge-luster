@@ -11,7 +11,7 @@ function useBooking() {
     error,
   } = useQuery({
     queryFn: () => getBooking(bookingId!),
-    queryKey: ['booking'],
+    queryKey: ['booking', bookingId],
     retry: false,
   });
 

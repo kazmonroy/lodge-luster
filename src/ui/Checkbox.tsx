@@ -4,7 +4,7 @@ interface Props {
   checked: boolean;
   onChange: () => void;
   disabled: boolean;
-  id: number;
+  id: string;
   children: JSX.Element;
 }
 
