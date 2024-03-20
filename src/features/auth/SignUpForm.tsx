@@ -14,7 +14,7 @@ function SignUpForm() {
     reset,
   } = useForm<SignUp>();
 
-  const { signup, isLoading } = useSignup();
+  const { signup } = useSignup();
 
   const onSubmit = ({ fullName, email, password }: SignUp) => {
     signup({ fullName, email, password }, { onSettled: () => reset() });

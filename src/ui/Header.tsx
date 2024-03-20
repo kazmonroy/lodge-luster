@@ -3,13 +3,14 @@ import Logout from '../features/auth/Logout';
 import Menu from './Menu';
 import styles from './styles/Header.module.css';
 import { useNavigate } from 'react-router-dom';
+import UserAvatar from '../features/auth/UserAvatar';
 function Header() {
   const navigate = useNavigate();
   return (
     <Menu>
       <header className={styles.header}>
         <Menu.Content>
-          <Menu.Toggle id='user' icon={<HiOutlineUser />} />
+          <Menu.Toggle id='user' icon={<UserAvatar />} />
           <Menu.List id='user'>
             <Menu.Button
               icon={<HiOutlineUser />}
