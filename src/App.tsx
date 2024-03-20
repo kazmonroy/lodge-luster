@@ -14,6 +14,7 @@ import SingleBooking from './pages/SingleBooking';
 import CheckIn from './pages/CheckIn';
 import Login from './pages/Login';
 import AuthGuard from './features/auth/AuthGuard';
+import Account from './pages/Account';
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
           {
             path: 'settings',
             element: <Settings />,
+          },
+          {
+            path: 'account',
+            element: <Account />,
           },
         ],
       },
