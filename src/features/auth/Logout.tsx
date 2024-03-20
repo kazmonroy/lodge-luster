@@ -1,12 +1,14 @@
-import Button from '../../ui/Button';
+import { HiMiniArrowRightOnRectangle } from 'react-icons/hi2';
+
+import Menu from '../../ui/Menu';
 import { useLogout } from './hooks/useLogout';
 
 function Logout() {
-  const { logout, isLoading } = useLogout();
+  const { logout } = useLogout();
   return (
-    <Button onClick={logout} disabled={isLoading}>
+    <Menu.Button onClick={logout} icon={<HiMiniArrowRightOnRectangle />}>
       Log out
-    </Button>
+    </Menu.Button>
   );
 }
 

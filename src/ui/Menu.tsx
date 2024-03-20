@@ -81,7 +81,13 @@ function Toggle({
   );
 }
 
-function List({ children, id }: { children: JSX.Element[]; id: number }) {
+function List({
+  children,
+  id,
+}: {
+  children: JSX.Element[];
+  id: number | string;
+}) {
   const { openId, close, position } = useContext(MenuContext);
   const { ref } = useCloseElement(close);
 
