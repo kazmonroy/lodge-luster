@@ -48,7 +48,13 @@ function Content({ children }: { children: JSX.Element[] }) {
   return <div style={{ position: 'relative' }}>{children}</div>;
 }
 
-function Toggle({ id }: { id: number }) {
+function Toggle({
+  id,
+  icon = <HiOutlineEllipsisVertical />,
+}: {
+  id: number | string;
+  icon?: JSX.Element;
+}) {
   const { openId, open, close, setPosition } = useContext(MenuContext);
 
   const handleToggle = (e: Event) => {
@@ -69,7 +75,7 @@ function Toggle({ id }: { id: number }) {
   return (
     <>
       <button className={styles.toggle} onClick={handleToggle}>
-        <HiOutlineEllipsisVertical />
+        {icon}
       </button>
     </>
   );
