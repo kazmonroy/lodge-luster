@@ -1,3 +1,4 @@
+import SignUpForm from '../features/auth/SignUpForm';
 import Row from '../ui/Row';
 
 function Users() {
@@ -5,6 +6,9 @@ function Users() {
     <>
       <Row direction='horizontal'>
         <h2>Users</h2>
+      </Row>
+      <Row>
+        <SignUpForm />
       </Row>
     </>
   );
