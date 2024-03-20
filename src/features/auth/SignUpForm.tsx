@@ -2,23 +2,22 @@ import { useForm } from 'react-hook-form';
 import FormRow from '../../ui/FormRow';
 import styles from '../../ui/styles/Form.module.css';
 import Button from '../../ui/Button';
+import { SignUp } from '../../services/apiAuth';
+import { useSignup } from './hooks/useSignup';
 
-interface SignUp {
-  fullName: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
 function SignUpForm() {
   const {
     register,
     formState: { errors },
     getValues,
     handleSubmit,
+    reset,
   } = useForm<SignUp>();
 
-  const onSubmit = (data: SignUp) => {
-    console.log(data);
+  const { signup, isLoading } = useSignup();
+
+  const onSubmit = ({ fullName, email, password }: SignUp) => {
+    signup({ fullName, email, password }, { onSettled: () => reset() });
   };
   return (
     <form
@@ -81,7 +80,9 @@ function SignUpForm() {
 
       <FormRow>
         <>
-          <Button style='secondary'>Cancel</Button>
+          <Button style='secondary' type='reset'>
+            Cancel
+          </Button>
           <Button>Create new user</Button>
         </>
       </FormRow>

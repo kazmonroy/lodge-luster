@@ -1,11 +1,37 @@
 import { supabase } from './supabase-client';
 
-interface Props {
+interface Login {
   email: string;
   password: string;
 }
 
-export async function login({ email, password }: Props) {
+export interface SignUp {
+  fullName: string;
+  email: string;
+  password: string;
+  confirmPassword?: string;
+}
+
+export async function signup({ fullName, email, password }: SignUp) {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        fullName,
+        avatar: '',
+      },
+    },
+  });
+
+  if (error) {
+    console.error(error);
+    throw new Error('Something went wrong while signing up');
+  }
+  return data;
+}
+
+export async function login({ email, password }: Login) {
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
@@ -15,8 +41,6 @@ export async function login({ email, password }: Props) {
     console.error(error);
     throw new Error('Something went wrong while login in');
   }
-
-  console.log(data);
 
   return data;
 }
