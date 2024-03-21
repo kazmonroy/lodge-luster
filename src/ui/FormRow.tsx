@@ -4,7 +4,7 @@ import Label from './Label';
 interface Props {
   label?: string;
   error?: string;
-  children: JSX.Element;
+  children: JSX.Element | JSX.Element[];
   direction?: 'row' | 'vertical';
 }
 function FormRow({ label, error, children, direction = 'row' }: Props) {
