@@ -1,8 +1,14 @@
-import { supabase } from './supabase-client';
+import { supabase, supabaseUrl } from './supabase-client';
 
 interface Login {
   email: string;
   password: string;
+}
+
+interface UpdateUser {
+  fullName: string;
+  password: string;
+  avatar: string;
 }
 
 export interface SignUp {
@@ -69,4 +75,53 @@ export async function logout() {
   }
 
   return null;
+}
+
+export async function updateCurrentUser({
+  password,
+  fullName,
+  avatar,
+}: UpdateUser) {
+  // 1. Update the password Otfullname
+
+  let updateData = {};
+
+  if (password) updateData = { password };
+  if (fullName) updateData = { data: { fullName } };
+
+  const { data, error } = await supabase.auth.updateUser(updateData);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  if (!avatar) return data;
+
+  // 2. Updload the avatar image
+
+  const fileName = `avatar-${data.user.id}-${crypto.randomUUID()}`;
+
+  const { error: imageError } = await supabase.storage
+    .from('avatars')
+    .upload(fileName, avatar!.image, {
+      contentType: 'image/jpeg',
+    });
+
+  if (imageError) {
+    // await supabase.from('avatars').delete().eq('id', data?.id);
+    console.error(imageError);
+    throw new Error('Avatr image could not be updated');
+  }
+  // 3. Update avatar in the user
+
+  const { data: updatedUser, error: updateUserError } =
+    await supabase.auth.updateUser({
+      data: { avatar: `${supabaseUrl}/storage/v1/object/public/avatars/` },
+    });
+
+  if (updateUserError) {
+    throw new Error(updateUserError.message);
+  }
+
+  return updatedUser;
 }
