@@ -3,26 +3,27 @@ import Button from '../../ui/Button';
 
 import FormRow from '../../ui/FormRow';
 import { useUser } from './hooks/useUser';
-
-interface UserData {
-  email: string;
-  fullName: string;
-  avatar: string;
-}
+import useUpdateUser from './hooks/useUpdateUser';
+import { UpdateUser } from '../../services/apiAuth';
 
 function UpdateUserForm() {
   const { user } = useUser();
+  const { updateUser, isUpdating } = useUpdateUser();
   const initialData = {
     email: user?.email,
     avatar: user?.user_metadata.avatar,
     fullName: user?.user_metadata.fullName,
   };
 
-  const { register, handleSubmit } = useForm<UserData>({
+  const { register, handleSubmit } = useForm<UpdateUser>({
     defaultValues: initialData,
   });
 
-  const onSubmit: SubmitHandler<UserData> = (data) => {
+  const onSubmit: SubmitHandler<UpdateUser> = (data) => {
+    const imgUpload =
+      typeof data.avatar === 'string' ? data.avatar : data.avatar![0];
+    updateUser({ ...data, avatar: imgUpload });
+
     console.log(data);
   };
   return (
@@ -36,7 +37,7 @@ function UpdateUserForm() {
           type='text'
           {...register('fullName')}
           id='fullName'
-          //   disabled={isUpdating}
+          disabled={isUpdating}
         />
       </FormRow>
 
@@ -46,18 +47,12 @@ function UpdateUserForm() {
           type='file'
           accept='image/*'
           {...register('avatar')}
-          //   onChange={(e) => setAvatar(e.target.files[0])}
-          //   disabled={isUpdating}
+          disabled={isUpdating}
         />
       </FormRow>
 
       <FormRow>
-        <Button
-          type='reset'
-          style='secondary'
-          //   disabled={isUpdating}
-          //   onClick={handleCancel}
-        >
+        <Button type='reset' style='secondary' disabled={isUpdating}>
           Cancel
         </Button>
         <Button>Update account</Button>

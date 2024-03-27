@@ -5,7 +5,8 @@ interface Login {
   password: string;
 }
 
-interface UpdateUser {
+export interface UpdateUser {
+  email?: string;
   fullName: string;
   password: string;
   avatar: string;
@@ -83,7 +84,6 @@ export async function updateCurrentUser({
   avatar,
 }: UpdateUser) {
   // 1. Update the password Otfullname
-
   let updateData = {};
 
   if (password) updateData = { password };
@@ -98,25 +98,24 @@ export async function updateCurrentUser({
   if (!avatar) return data;
 
   // 2. Updload the avatar image
-
   const fileName = `avatar-${data.user.id}-${crypto.randomUUID()}`;
-
   const { error: imageError } = await supabase.storage
     .from('avatars')
-    .upload(fileName, avatar!.image, {
+    .upload(fileName, avatar, {
       contentType: 'image/jpeg',
     });
 
   if (imageError) {
-    // await supabase.from('avatars').delete().eq('id', data?.id);
     console.error(imageError);
     throw new Error('Avatr image could not be updated');
   }
-  // 3. Update avatar in the user
 
+  // 3. Update avatar in the user
   const { data: updatedUser, error: updateUserError } =
     await supabase.auth.updateUser({
-      data: { avatar: `${supabaseUrl}/storage/v1/object/public/avatars/` },
+      data: {
+        avatar: `${supabaseUrl}/storage/v1/object/public/avatars/${fileName}`,
+      },
     });
 
   if (updateUserError) {
