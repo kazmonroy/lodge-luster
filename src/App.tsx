@@ -15,6 +15,7 @@ import CheckIn from './pages/CheckIn';
 import Login from './pages/Login';
 import AuthGuard from './features/auth/AuthGuard';
 import Account from './pages/Account';
+import { DarkModeProvider } from './context/DarkModeContext';
 
 const router = createBrowserRouter([
   {
@@ -79,43 +80,45 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
-        <RouterProvider router={router} />
-        <Toaster
-          position='top-center'
-          reverseOrder={false}
-          gutter={12}
-          containerClassName=''
-          containerStyle={{}}
-          toastOptions={{
-            // Define default options
-            className: '',
-            duration: 5000,
-            style: {
-              fontSize: '0.9rem',
-              maxWidth: '500px',
-              padding: '.5rem 1rem',
-            },
-
-            // Default options for specific types
-            success: {
-              duration: 3000,
-              style: {
-                background: 'var(--color-grey-0)',
-                color: 'var(--color-green-700)',
-              },
-            },
-            error: {
+      <DarkModeProvider>
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={false} />
+          <RouterProvider router={router} />
+          <Toaster
+            position='top-center'
+            reverseOrder={false}
+            gutter={12}
+            containerClassName=''
+            containerStyle={{}}
+            toastOptions={{
+              // Define default options
+              className: '',
               duration: 5000,
               style: {
-                background: 'var(--color-grey-0)',
-                color: 'var(--color-red-700)',
+                fontSize: '0.9rem',
+                maxWidth: '500px',
+                padding: '.5rem 1rem',
               },
-            },
-          }}
-        />
-      </QueryClientProvider>
+
+              // Default options for specific types
+              success: {
+                duration: 3000,
+                style: {
+                  background: 'var(--color-grey-0)',
+                  color: 'var(--color-green-700)',
+                },
+              },
+              error: {
+                duration: 5000,
+                style: {
+                  background: 'var(--color-grey-0)',
+                  color: 'var(--color-red-700)',
+                },
+              },
+            }}
+          />
+        </QueryClientProvider>
+      </DarkModeProvider>
     </>
   );
 }
