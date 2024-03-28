@@ -142,6 +142,7 @@ button {
   font-size: inherit;
   border: none;
   background: none;
+  border-radius: 0.5rem;
 }
 
 textarea {

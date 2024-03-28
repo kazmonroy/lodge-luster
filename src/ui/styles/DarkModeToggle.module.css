@@ -3,5 +3,10 @@
     border: none;
     font-size: 1.25rem;
     color: var(--color-grey-600);
+    padding: 0.5rem;
+
+    &:hover {
+      background-color: var(--color-grey-100);
+    }
   }
 }
