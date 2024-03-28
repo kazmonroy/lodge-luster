@@ -15,7 +15,7 @@ function UpdateUserForm() {
     fullName: user?.user_metadata.fullName,
   };
 
-  const { register, handleSubmit } = useForm<UpdateUser>({
+  const { register, handleSubmit, setValue } = useForm<UpdateUser>({
     defaultValues: initialData,
   });
 
@@ -23,9 +23,13 @@ function UpdateUserForm() {
     const imgUpload =
       typeof data.avatar === 'string' ? data.avatar : data.avatar![0];
     updateUser({ ...data, avatar: imgUpload });
-
-    console.log(data);
   };
+
+  const handleCancel = () => {
+    setValue('fullName', user?.user_metadata.fullName);
+    setValue('avatar', user?.user_metadata.avatar);
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormRow label='Email address'>
@@ -52,7 +56,7 @@ function UpdateUserForm() {
       </FormRow>
 
       <FormRow>
-        <Button type='reset' style='secondary' disabled={isUpdating}>
+        <Button style='secondary' disabled={isUpdating} onClick={handleCancel}>
           Cancel
         </Button>
         <Button>Update account</Button>
