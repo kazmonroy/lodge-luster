@@ -1,0 +1,7 @@
+.toggle {
+  button {
+    border: none;
+    font-size: 1.25rem;
+    color: var(--color-grey-600);
+  }
+}
