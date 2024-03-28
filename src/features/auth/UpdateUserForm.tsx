@@ -1,8 +1,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { UpdateUser } from '../../services/apiAuth';
-import Button from '../../ui/Button';
 import { useUser } from './hooks/useUser';
-
+import Button from '../../ui/Button';
 import FormRow from '../../ui/FormRow';
 
 import useUpdateUser from './hooks/useUpdateUser';
@@ -37,7 +36,7 @@ function UpdateUserForm() {
     <>
       <FormHeader
         header='Personal Information'
-        description='This information will be displayed publicly so be careful what you share.
+        description='This information will be displayed publicly so be careful what you share
 
 '
       />
@@ -73,7 +72,7 @@ function UpdateUserForm() {
           >
             Cancel
           </Button>
-          <Button>Update account</Button>
+          <Button>Update information</Button>
         </FormRow>
       </form>
     </>

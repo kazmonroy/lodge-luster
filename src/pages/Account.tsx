@@ -1,3 +1,4 @@
+import UpdatePasswordForm from '../features/auth/UpdatePasswordForm';
 import UpdateUserForm from '../features/auth/UpdateUserForm';
 import Row from '../ui/Row';
 
@@ -10,6 +11,10 @@ function Account() {
 
       <Row>
         <UpdateUserForm />
+      </Row>
+
+      <Row>
+        <UpdatePasswordForm />
       </Row>
     </>
   );

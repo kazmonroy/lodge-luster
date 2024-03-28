@@ -7,9 +7,10 @@ interface Login {
 
 export interface UpdateUser {
   email?: string;
-  fullName: string;
-  password: string;
-  avatar: string;
+  fullName?: string;
+  password?: string;
+  avatar?: string;
+  confirmPassword?: string;
 }
 
 export interface SignUp {
