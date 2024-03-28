@@ -9,7 +9,6 @@ function Account() {
       </Row>
 
       <Row>
-        <h3>Update user data</h3>
         <UpdateUserForm />
       </Row>
     </>

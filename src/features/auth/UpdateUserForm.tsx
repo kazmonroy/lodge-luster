@@ -1,10 +1,12 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { UpdateUser } from '../../services/apiAuth';
 import Button from '../../ui/Button';
+import { useUser } from './hooks/useUser';
 
 import FormRow from '../../ui/FormRow';
-import { useUser } from './hooks/useUser';
+
 import useUpdateUser from './hooks/useUpdateUser';
-import { UpdateUser } from '../../services/apiAuth';
+import FormHeader from '../../ui/FormHeader';
 
 function UpdateUserForm() {
   const { user } = useUser();
@@ -26,43 +28,55 @@ function UpdateUserForm() {
   };
 
   const handleCancel = (e) => {
-    console.log(e.preventDefault());
+    e.preventDefault();
     setValue('fullName', user?.user_metadata.fullName);
     setValue('avatar', user?.user_metadata.avatar);
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <FormRow label='Email address'>
-        <input {...register('email')} disabled />
-      </FormRow>
+    <>
+      <FormHeader
+        header='Personal Information'
+        description='This information will be displayed publicly so be careful what you share.
 
-      <FormRow label='Full name'>
-        <input
-          type='text'
-          {...register('fullName')}
-          id='fullName'
-          disabled={isUpdating}
-        />
-      </FormRow>
+'
+      />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <FormRow label='Email address'>
+          <input {...register('email')} disabled />
+        </FormRow>
 
-      <FormRow label='Avatar image'>
-        <input
-          id='image'
-          type='file'
-          accept='image/*'
-          {...register('avatar')}
-          disabled={isUpdating}
-        />
-      </FormRow>
+        <FormRow label='Full name'>
+          <input
+            type='text'
+            {...register('fullName')}
+            id='fullName'
+            disabled={isUpdating}
+          />
+        </FormRow>
 
-      <FormRow>
-        <Button style='secondary' disabled={isUpdating} onClick={handleCancel}>
-          Cancel
-        </Button>
-        <Button>Update account</Button>
-      </FormRow>
-    </form>
+        <FormRow label='Avatar image'>
+          <input
+            id='image'
+            type='file'
+            accept='image/*'
+            {...register('avatar')}
+            disabled={isUpdating}
+          />
+        </FormRow>
+
+        <FormRow>
+          <Button
+            style='secondary'
+            disabled={isUpdating}
+            onClick={handleCancel}
+          >
+            Cancel
+          </Button>
+          <Button>Update account</Button>
+        </FormRow>
+      </form>
+    </>
   );
 }
 
