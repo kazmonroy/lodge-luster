@@ -7,7 +7,7 @@ interface Props {
   children: ReactNode;
   type?: 'button' | 'submit' | 'reset' | undefined;
   disabled?: boolean;
-  onClick?: () => void;
+  onClick?: (e?: any) => void;
   icon?: JSX.Element;
 }
 function Button({
