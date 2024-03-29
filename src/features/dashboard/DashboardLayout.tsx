@@ -1,4 +1,5 @@
 import Spinner from '../../ui/Spinner';
+import Stats from './Stats';
 import { useRecentBookings } from './hooks/useRecentBookings';
 import { useRecentStays } from './hooks/useRecentStays';
 import styles from './styles/DashboardLayout.module.css';
@@ -12,7 +13,7 @@ function DashboardLayout() {
   if (isLoadingBookings || isLoadingStays) return <Spinner />;
   return (
     <div className={styles.dashboard}>
-      <div>Stats</div>
+      <Stats bookings={bookings} confirmedStays={confirmedStays} />
       <div>Todays activities</div>
       <div>stay durations</div>
       <div>sales chart</div>
