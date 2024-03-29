@@ -1,4 +1,5 @@
 import { formatDistance, parseISO, differenceInDays } from 'date-fns';
+import { Booking } from '../services/types/collection';
 
 // We want to make this function work for both Date objects and strings (which come from Supabase)
 export const subtractDates = (dateStr1: string, dateStr2: string) =>
@@ -28,17 +29,18 @@ export const formatCurrency = (value: number) =>
     value
   );
 
-import { Booking } from '../../../services/types/collection';
-
 interface StartData {
   duration: string;
   value: number;
   color: string;
 }
 
-export function prepareData(startData: StartData[], stays: Booking[] = []) {
+export function prepareStaysDurationData(
+  startData: StartData[],
+  stays: Booking[] = []
+) {
   function incArrayValue(arr: StartData[], field: string) {
-    return arr.map((obj) =>
+    return arr.map((obj: StartData) =>
       obj.duration === field ? { ...obj, value: obj.value + 1 } : obj
     );
   }
@@ -57,7 +59,7 @@ export function prepareData(startData: StartData[], stays: Booking[] = []) {
       if (num! >= 21) return incArrayValue(arr, '21+ nights');
       return arr;
     }, startData)
-    .filter((obj) => obj.value > 0);
+    .filter((obj: StartData) => obj.value > 0);
 
   return data;
 }

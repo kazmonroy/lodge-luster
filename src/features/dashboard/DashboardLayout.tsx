@@ -1,11 +1,11 @@
-import Spinner from '../../ui/Spinner';
 import { useCabins } from '../cabins/hooks/useCabins';
-import DurationChart from './DurationChart';
-import SalesChart from './SalesChart';
-import Stats from './Stats';
 import { useQueryDate } from './hooks/useQueryDate';
 import { useRecentBookings } from './hooks/useRecentBookings';
 import { useRecentStays } from './hooks/useRecentStays';
+import StaysDurationChart from './StaysDurationChart';
+import SalesChart from './SalesChart';
+import Stats from './Stats';
+import Spinner from '../../ui/Spinner';
 import styles from './styles/DashboardLayout.module.css';
 
 function DashboardLayout() {
@@ -24,7 +24,7 @@ function DashboardLayout() {
         cabinCount={cabins?.length}
       />
       <div>Todays activities</div>
-      <DurationChart confirmedStays={confirmedStays} />
+      <StaysDurationChart confirmedStays={confirmedStays} />
       <SalesChart bookings={bookings} numDays={numDays} />
     </div>
   );

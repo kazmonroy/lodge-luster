@@ -9,7 +9,7 @@ import {
 import { Booking } from '../../services/types/collection';
 import styles from './styles/DurationChart.module.css';
 import { useDarkMode } from '../../context/DarkModeContext';
-import { prepareData } from '../../utils/helpers';
+import { prepareStaysDurationData } from '../../utils/helpers';
 
 const startDataLight = [
   {
@@ -97,10 +97,10 @@ const startDataDark = [
   },
 ];
 
-function DurationChart({ confirmedStays }: { confirmedStays: Booking[] }) {
+function StaysDurationChart({ confirmedStays }: { confirmedStays: Booking[] }) {
   const { isDarkMode } = useDarkMode();
   const startData = isDarkMode ? startDataDark : startDataLight;
-  const data = prepareData(startData, confirmedStays);
+  const data = prepareStaysDurationData(startData, confirmedStays);
   return (
     <div className={styles.durationChart}>
       <h2> Stay duration summary</h2>
@@ -138,4 +138,4 @@ function DurationChart({ confirmedStays }: { confirmedStays: Booking[] }) {
   );
 }
 
-export default DurationChart;
+export default StaysDurationChart;
