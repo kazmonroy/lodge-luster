@@ -2,7 +2,7 @@ import styles from './styles/Stat.module.css';
 interface Props {
   icon: JSX.Element;
   title: string;
-  value: number;
+  value: number | string;
   color: string;
 }
 
