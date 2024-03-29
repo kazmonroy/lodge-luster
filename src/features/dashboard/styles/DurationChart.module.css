@@ -1,0 +1,12 @@
+.durationChart {
+  grid-column: 3 / span 2;
+
+  & .recharts-pie-label-text {
+    font-weight: 600;
+  }
+
+  /* A bit hack, but okay */
+  & > *:first-child {
+    margin-bottom: 1.6rem;
+  }
+}
