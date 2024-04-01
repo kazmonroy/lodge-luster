@@ -6,13 +6,17 @@ interface Context {
   toggleDarkMode: () => void;
 }
 
+const userColorScheme = window.matchMedia(
+  '(prefers-color-scheme: dark)'
+).matches;
+
 const DarkModeContext = createContext<Context>({
-  isDarkMode: false,
+  isDarkMode: userColorScheme,
   toggleDarkMode: () => {},
 });
 
 function DarkModeProvider({ children }: { children: JSX.Element }) {
-  const initialState = { initialState: false, key: 'isDarkMode' };
+  const initialState = { initialState: userColorScheme, key: 'isDarkMode' };
   const [isDarkMode, setIsDarkMode] = useLocalStorageState(initialState);
 
   const toggleDarkMode = () => {
