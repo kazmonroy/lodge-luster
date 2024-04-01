@@ -1,30 +1,34 @@
-# React + TypeScript + Vite
+<a name="readme-top"></a>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<div align="center">
 
-Currently, two official plugins are available:
+<p align="center">
+   <h3 align="center">Lodge Luster</h3>
+    <br />
+    <br />
+    <a href="https://lodge-luster.vercel.app/">View Demo</a>
+    ·
+    <a href="https://github.com/kazmonroy/lodge-luster/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/kazmonroy/lodge-luster/issues">Request Feature</a>
+  </p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<p align="center">
+  Built with:
+</p>
+<p align="center">
+    <a href="https://vercel.com/"><img src="https://img.shields.io/badge/Vercel-v.32-2181C1?&logo=vercel" alt="Vercel"></a>
+    <a href="https://react.dev/"><img src="https://img.shields.io/badge/React-v.18-2181C1?&logo=react&logoColor=white" alt="React"></a>
+    <a href="https://tanstack.com/query/v3/"><img src="https://img.shields.io/badge/react_query-v.4-2181C1?&logo=react&logoColor=white" alt="Vite"></a>
+    <a href="https://supabase.com/"><img src="https://img.shields.io/badge/supabase-v.1-2181C1?&logo=supabase&logoColor=white" alt="Supabase"></a>
+</p>
 
-## Expanding the ESLint configuration
+</div>
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## About
 
-- Configure the top-level `parserOptions` property like this:
+Lodge Luster is a full-stack booking system application built with [React TypeScript](https://react.dev/) in the frontend and [Supabase](https://supabase.com/) on the backend. In addition, it uses [React Query](https://tanstack.com/query/v3/docs/framework/react/overview) to manage serve state. It is styled with [CSS Modules](https://github.com/css-modules/css-modules) and have applied modern CSS-properties and syntax.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## License
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Distributed under the [MIT](https://choosealicense.com/licenses/mit/) License.
