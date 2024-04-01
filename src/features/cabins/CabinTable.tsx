@@ -13,6 +13,7 @@ function CabinTable() {
   const sortByQuery = searchParams.get('sortBy') || 'name-asc';
 
   if (isLoading) return <Spinner />;
+
   // Filter
   const filteredCabins =
     filterQuery === 'with-discount'

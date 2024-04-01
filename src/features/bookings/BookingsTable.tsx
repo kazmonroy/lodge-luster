@@ -9,6 +9,8 @@ import Menu from '../../ui/Menu';
 function BookingsTable() {
   const { bookings, isLoading, count } = useBookings();
 
+  if (!bookings?.length) return 'No bookings at the moment';
+
   if (isLoading) return <Spinner />;
   return (
     <Menu>
