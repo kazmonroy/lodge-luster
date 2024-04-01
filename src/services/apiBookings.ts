@@ -119,3 +119,19 @@ export async function getStaysAfterDate(date: string) {
 
   return data;
 }
+
+export async function getStaysTodayActivity() {
+  const { data, error } = await supabase
+    .from('bookings')
+    .select('*, guests(fullName, nationality, countryFlag)')
+    .or(
+      `and(status.eq.unconfirmed,startDate.eq.${getToday()}),and(status.eq.checked-in,endDate.eq.${getToday()})`
+    )
+    .order('created_at');
+
+  if (error) {
+    console.error(error);
+    throw new Error('Bookings could not get loaded');
+  }
+  return data;
+}
