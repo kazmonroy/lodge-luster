@@ -58,6 +58,7 @@ function Toggle({
   const { openId, open, close, setPosition } = useContext(MenuContext);
 
   const handleToggle = (e: Event) => {
+    e.stopPropagation();
     const rect = (e!.target! as HTMLElement)
       .closest('button')
       ?.getBoundingClientRect();
@@ -89,7 +90,7 @@ function List({
   id: number | string;
 }) {
   const { openId, close, position } = useContext(MenuContext);
-  const { ref } = useCloseElement(close);
+  const { ref } = useCloseElement(close, false);
 
   if (openId !== id) return null;
 
