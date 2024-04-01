@@ -1,9 +1,6 @@
 <a name="readme-top"></a>
 
 <div align="center">
-  <a href="https://github.com/kazmonroy/spire">
-    <img src="/public/logo.svg" alt="Logo" width="80" height="80">
-  </a>
 
  <h3 align="center">Lodge Luster</h3>
   <p align="center">
