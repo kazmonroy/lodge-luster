@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../../ui/Button';
 import Tag from '../../ui/Tag';
 import styles from './styles/TodayItem.module.css';
+import { useCheckout } from './hooks/useCheckout';
 interface Props {
   activity: {
     id: string;
@@ -12,10 +13,16 @@ interface Props {
 }
 
 function TodayItem({ activity }: Props) {
-  const { id, status, guests, numNights } = activity;
+  const { id: bookingId, status, guests, numNights } = activity;
+  const { checkout } = useCheckout();
+
+  const handleCheckout = () => {
+    checkout({ bookingId });
+  };
 
   const navigate = useNavigate();
-  const handleClick = () => navigate(`/checkin/${id}`);
+  const handleCheckIn = () => navigate(`/checkin/${bookingId}`);
+
   return (
     <div className={styles.todayItem}>
       {status === 'unconfirmed' && <Tag type='green'>Arriving</Tag>}
@@ -30,8 +37,14 @@ function TodayItem({ activity }: Props) {
       <div>{numNights} nights</div>
 
       {status === 'unconfirmed' && (
-        <Button size='small' onClick={handleClick}>
+        <Button size='small' onClick={handleCheckIn}>
           Check in
+        </Button>
+      )}
+
+      {status === 'checked-in' && (
+        <Button size='small' onClick={handleCheckout}>
+          Check out
         </Button>
       )}
     </div>

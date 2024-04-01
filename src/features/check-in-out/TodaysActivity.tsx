@@ -8,7 +8,6 @@ import { Booking } from '../../services/types/collection';
 function TodaysActivity() {
   const { stays, isLoading } = useTodaysActivity();
 
-  console.log(stays);
   return (
     <div className={styles.todaysActivity}>
       <h2>Today</h2>
@@ -17,7 +16,7 @@ function TodaysActivity() {
           <TodaysList
             data={stays!}
             render={(activity: Booking) => (
-              <TodayItem key={activity.cabinId} activity={activity} />
+              <TodayItem key={activity.id} activity={activity} />
             )}
           />
         ) : (
