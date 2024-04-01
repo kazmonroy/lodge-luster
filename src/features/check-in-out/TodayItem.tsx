@@ -6,7 +6,7 @@ interface Props {
   activity: {
     id: string;
     status: string;
-    guests: string;
+    guests: { countryFlag: string; country: string; fullName: string };
     numNights: number;
   };
 }
