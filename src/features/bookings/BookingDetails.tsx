@@ -22,7 +22,7 @@ function BookingDetails() {
   const navigate = useNavigate();
 
   if (isLoading) return <Spinner />;
-  if (!booking) return <p>No bookings at the moment</p>;
+  if (!booking) return <p>Booking not found</p>;
 
   const { status, id: bookingId } = booking;
 
