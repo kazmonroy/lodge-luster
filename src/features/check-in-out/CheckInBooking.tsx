@@ -15,7 +15,7 @@ import { useSettings } from '../settings/hooks/useSettings';
 function CheckInBooking() {
   const [confirmPaid, setConfirmPaid] = useState<boolean>(false);
   const [addBreakfast, setAddBreakfast] = useState<boolean>(false);
-  const { booking = {}, isLoading } = useBooking();
+  const { booking, isLoading } = useBooking();
   const { checkin, isCheckingIn } = useCheckin();
   const { settings: { breakfastPrice } = {}, isLoading: isLoadingSettings } =
     useSettings();
@@ -28,9 +28,8 @@ function CheckInBooking() {
     hasBreakfast,
     numNights,
     numGuests,
-
-    guests: { fullName: guestName } = {},
-  } = booking;
+    guests: { fullName: guestName },
+  } = booking!;
 
   const moveBack = useMoveBack();
 
@@ -45,9 +44,9 @@ function CheckInBooking() {
   if (isLoading || isLoadingSettings) return <Spinner />;
   if (!booking) return <p>No bookings at the moment</p>;
 
-  const optionalBreakfastPrice = breakfastPrice! * numNights * numGuests;
+  const optionalBreakfastPrice = breakfastPrice! * numNights! * numGuests!;
   const finalBookingPrice = addBreakfast
-    ? optionalBreakfastPrice + totalPrice
+    ? optionalBreakfastPrice + totalPrice!
     : totalPrice;
 
   const handleCheckIn = () => {
@@ -59,7 +58,7 @@ function CheckInBooking() {
         breakfast: {
           hasBreakfast: true,
           extrasPrice: optionalBreakfastPrice,
-          totalPrice: finalBookingPrice,
+          totalPrice: finalBookingPrice!,
         },
       });
     } else {
@@ -115,9 +114,9 @@ function CheckInBooking() {
           <span>
             I confirm that {guestName} has paid the total amount of{' '}
             <span>
-              {formatCurrency(finalBookingPrice)}{' '}
+              {formatCurrency(finalBookingPrice!)}{' '}
               {addBreakfast
-                ? `(${formatCurrency(totalPrice)} + ${formatCurrency(
+                ? `(${formatCurrency(totalPrice!)} + ${formatCurrency(
                     optionalBreakfastPrice
                   )})`
                 : ''}

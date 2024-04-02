@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 function useCloseElement(close: () => void, listenCapture = true) {
-  const ref = useRef<HTMLInputElement | null>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     function handleClick(e: any) {

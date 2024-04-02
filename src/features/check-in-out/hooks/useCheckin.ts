@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 interface Props {
-  bookingId: string;
+  bookingId: number;
   breakfast?: {
     extrasPrice: number;
     totalPrice: number;

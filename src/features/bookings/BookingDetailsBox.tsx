@@ -10,7 +10,7 @@ import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers';
 import DataItem from '../../ui/DataItem';
 import { Booking } from '../../services/types/collection';
 
-function BookingDetailsBox({ booking = {} }: { booking: Booking }) {
+function BookingDetailsBox({ booking }: { booking: Booking }) {
   const {
     created_at,
     startDate,
@@ -25,7 +25,8 @@ function BookingDetailsBox({ booking = {} }: { booking: Booking }) {
     isPaid,
     guests: { fullName: guestName, email, country, countryFlag, nationalID },
     cabins: { name: cabinName },
-  } = booking;
+  } = booking!;
+
   return (
     <section className={styles.detailsBox}>
       <div className={styles.detailsHeader}>
@@ -38,11 +39,11 @@ function BookingDetailsBox({ booking = {} }: { booking: Booking }) {
         </div>
 
         <p>
-          {format(new Date(startDate), 'EEE, MMM dd yyyy')} (
-          {isToday(new Date(startDate))
+          {format(new Date(startDate!), 'EEE, MMM dd yyyy')} (
+          {isToday(new Date(startDate!))
             ? 'Today'
-            : formatDistanceFromNow(startDate)}
-          ) &mdash; {format(new Date(endDate), 'EEE, MMM dd yyyy')}
+            : formatDistanceFromNow(startDate!)}
+          ) &mdash; {format(new Date(endDate!), 'EEE, MMM dd yyyy')}
         </p>
       </div>
 
@@ -80,12 +81,11 @@ function BookingDetailsBox({ booking = {} }: { booking: Booking }) {
         <div className={`${styles.price} ${isPaid && styles.isPaid}`}>
           <DataItem icon={<HiOutlineCurrencyDollar />} label={`Total price:`}>
             {formatCurrency(totalPrice!)}
-
-            {hasBreakfast &&
-              ` (${formatCurrency(cabinPrice)} cabin + ${formatCurrency(
-                extrasPrice!
-              )} breakfast)`}
           </DataItem>
+          {hasBreakfast &&
+            ` (${formatCurrency(cabinPrice!)} cabin + ${formatCurrency(
+              extrasPrice!
+            )} breakfast)`}
 
           <p>{isPaid ? 'Paid' : 'Will pay at property'}</p>
         </div>

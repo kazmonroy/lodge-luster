@@ -95,7 +95,7 @@ function List({
   if (openId !== id) return null;
 
   return createPortal(
-    <ul
+    <div
       ref={ref}
       style={{
         right: `${position?.x}px`,
@@ -105,7 +105,7 @@ function List({
       className={styles.menuList}
     >
       {children}
-    </ul>,
+    </div>,
     document.body
   );
 }

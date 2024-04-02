@@ -1,15 +1,14 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateSetting as updateSettingApi } from "../../../services/apiSettings";
-import toast from "react-hot-toast";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { updateSetting as updateSettingApi } from '../../../services/apiSettings';
+import toast from 'react-hot-toast';
 
 export function useUpdateSetting() {
   const queryClient = useQueryClient();
   const { mutate: updateSetting, isLoading: isUpdating } = useMutation({
     mutationFn: updateSettingApi,
-    queryKey: ["settings"],
     onSuccess: () => {
-      queryClient.invalidateQueries(["settings"]);
-      toast.success("Settings successfully updated!");
+      queryClient.invalidateQueries(['settings']);
+      toast.success('Settings successfully updated!');
     },
     onError: (err: Error) => toast.error(err.message),
   });

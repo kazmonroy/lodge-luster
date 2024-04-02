@@ -24,7 +24,7 @@ function BookingDetails() {
   if (isLoading) return <Spinner />;
   if (!booking) return <p>Booking not found</p>;
 
-  const { status, id: bookingId } = booking;
+  const { status, id: bookingId } = booking!;
 
   const statusToTagName = {
     unconfirmed: 'blue',

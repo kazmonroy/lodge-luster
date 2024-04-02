@@ -13,8 +13,8 @@ interface Props {
   onCloseModal?: () => void;
 }
 
-function CreateCabinForm({ cabinToEdit = {}, onCloseModal }: Props) {
-  const { id: editId, ...editValues } = cabinToEdit;
+function CreateCabinForm({ cabinToEdit, onCloseModal }: Props) {
+  const { id: editId, ...editValues } = cabinToEdit!;
   const isEditSession = Boolean(editId);
   const {
     register,
@@ -35,10 +35,10 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }: Props) {
 
     if (isEditSession) {
       editCabin(
-        { newCabin: { ...data, image: imgUpload }, id: editId },
+        { newCabin: { ...data, image: imgUpload }, id: editId! },
         {
           onSuccess: () => {
-            toast.success(`Cabin ${cabinToEdit.name} successfully edited!`);
+            toast.success(`Cabin ${cabinToEdit?.name} successfully edited!`);
             onCloseModal?.();
           },
         }

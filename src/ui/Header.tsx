@@ -12,8 +12,8 @@ function Header() {
       <header className={styles.header}>
         <DarkModeToggle />
         <Menu.Content>
-          <Menu.Toggle id='user' icon={<UserAvatar />} />
-          <Menu.List id='user'>
+          <Menu.Toggle id={1} icon={<UserAvatar />} />
+          <Menu.List id={1}>
             <Menu.Button
               icon={<HiOutlineUser />}
               onClick={() => navigate('account')}
