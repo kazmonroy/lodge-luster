@@ -8,7 +8,7 @@ export function useDeleteBooking() {
     mutationFn: deleteBookingApi,
     onSuccess: () => {
       toast.success('Booking successfully deleted!');
-      queryClient.invalidateQueries({ active: true });
+      queryClient.invalidateQueries();
     },
     onError: (err: Error) => toast.error(err.message),
   });

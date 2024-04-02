@@ -15,20 +15,20 @@ import { useSettings } from '../settings/hooks/useSettings';
 function CheckInBooking() {
   const [confirmPaid, setConfirmPaid] = useState<boolean>(false);
   const [addBreakfast, setAddBreakfast] = useState<boolean>(false);
-  const { booking, isLoading } = useBooking();
+  const { booking = {}, isLoading } = useBooking();
   const { checkin, isCheckingIn } = useCheckin();
   const { settings: { breakfastPrice } = {}, isLoading: isLoadingSettings } =
     useSettings();
 
   const {
-    status,
     id: bookingId,
     isPaid,
+    status,
     totalPrice,
     hasBreakfast,
     numNights,
     numGuests,
-    guests: { fullName: guestName },
+    guests: { fullName: guestName } = {},
   } = booking!;
 
   const moveBack = useMoveBack();
