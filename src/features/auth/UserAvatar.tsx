@@ -4,7 +4,7 @@ import styles from './styles/UserAvatar.module.css';
 function UserAvatar() {
   const { user } = useUser();
 
-  const { avatar } = user?.user_metadata;
+  const { avatar } = user!.user_metadata!;
 
   return (
     <div className={styles.avatarWrapper}>
