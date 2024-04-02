@@ -32,7 +32,7 @@ function BookingDetailsBox({ booking = {} }: { booking: Booking }) {
         <div>
           <HiOutlineHomeModern />
           <p>
-            {numNights} {numNights <= 1 ? 'night' : 'nights'} in Cabin{' '}
+            {numNights} {numNights! <= 1 ? 'night' : 'nights'} in Cabin{' '}
             <span>{cabinName}</span>
           </p>
         </div>

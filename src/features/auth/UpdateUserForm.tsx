@@ -26,7 +26,7 @@ function UpdateUserForm() {
     updateUser({ ...data, avatar: imgUpload });
   };
 
-  const handleCancel = (e) => {
+  const handleCancel = (e: SubmitEvent) => {
     e.preventDefault();
     setValue('fullName', user?.user_metadata.fullName);
     setValue('avatar', user?.user_metadata.avatar);

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { MouseEventHandler, createContext, useContext, useState } from 'react';
 import { HiOutlineEllipsisVertical } from 'react-icons/hi2';
 import useCloseElement from '../hooks/useCloseElement';
 import { createPortal } from 'react-dom';
@@ -52,12 +52,12 @@ function Toggle({
   id,
   icon = <HiOutlineEllipsisVertical />,
 }: {
-  id: number | string;
+  id: number;
   icon?: JSX.Element;
 }) {
   const { openId, open, close, setPosition } = useContext(MenuContext);
 
-  const handleToggle = (e: Event) => {
+  const handleToggle: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
     const rect = (e!.target! as HTMLElement)
       .closest('button')
