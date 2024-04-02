@@ -118,12 +118,10 @@ function Button({ children, onClick, icon }: MenuButton) {
   };
 
   return (
-    <li>
-      <button className={styles.listButton} onClick={handleClick}>
-        {icon}
-        <span>{children}</span>
-      </button>
-    </li>
+    <button className={styles.listButton} onClick={handleClick}>
+      {icon}
+      <span>{children}</span>
+    </button>
   );
 }
 
