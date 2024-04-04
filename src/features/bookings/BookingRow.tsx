@@ -31,7 +31,7 @@ function BookingRow({ booking }: { booking: Booking }) {
     startDate,
     endDate,
     numNights,
-  } = booking;
+  } = booking!;
 
   const Navigate = useNavigate();
 

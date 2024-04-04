@@ -26,18 +26,10 @@ function BookingDetails() {
 
   const { status, id: bookingId } = booking!;
 
-  // const statusToTagName = {
-  //   unconfirmed: 'blue',
-  //   'checked-in': 'green',
-  //   'checked-out': 'silver',
-  // };
-
-  const statusToTagName = () => {
-    status === 'unconfirmed'
-      ? 'blue'
-      : status === 'checked-in'
-      ? 'green'
-      : 'silver';
+  const statusToTagName = {
+    unconfirmed: 'blue',
+    'checked-in': 'green',
+    'checked-out': 'silver',
   };
 
   const handleCheckout = () => {
@@ -54,7 +46,7 @@ function BookingDetails() {
       <Row direction='horizontal'>
         <div className={styles.headingGroup}>
           <h1>Booking #{bookingId}</h1>
-          <Tag type={statusToTagName()}>{status!.replace('-', ' ')}</Tag>
+          <Tag type={statusToTagName[status]}>{status!.replace('-', ' ')}</Tag>
         </div>
         <Button style='text' onClick={moveBack}>
           &larr; Back
