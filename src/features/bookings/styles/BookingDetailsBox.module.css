@@ -68,12 +68,13 @@
 .price {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   padding: 1.5rem 2rem;
   border-radius: var(--border-radius-sm);
   margin-top: 2.4rem;
   background-color: var(--color-yellow-100);
   color: var(--color-yellow-700);
+  gap: 0.5rem;
 
   &.isPaid {
     background-color: var(--color-green-100);
@@ -83,6 +84,7 @@
   & p:last-child {
     text-transform: uppercase;
     font-weight: 500;
+    margin-left: auto;
   }
 
   svg {

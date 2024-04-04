@@ -4,11 +4,12 @@ import {
   HiOutlineCurrencyDollar,
   HiOutlineHomeModern,
 } from 'react-icons/hi2';
-import styles from './styles/BookingDetailsBox.module.css';
+
+import { Booking } from '../../services/types/collection';
 import { format, isToday } from 'date-fns';
 import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers';
 import DataItem from '../../ui/DataItem';
-import { Booking } from '../../services/types/collection';
+import styles from './styles/BookingDetailsBox.module.css';
 
 function BookingDetailsBox({ booking }: { booking: Booking }) {
   const {
@@ -82,10 +83,12 @@ function BookingDetailsBox({ booking }: { booking: Booking }) {
           <DataItem icon={<HiOutlineCurrencyDollar />} label={`Total price:`}>
             {formatCurrency(totalPrice!)}
           </DataItem>
-          {hasBreakfast &&
-            ` (${formatCurrency(cabinPrice!)} cabin + ${formatCurrency(
-              extrasPrice!
-            )} breakfast)`}
+          <>
+            {hasBreakfast &&
+              ` (${formatCurrency(cabinPrice!)} cabin + ${formatCurrency(
+                extrasPrice!
+              )} breakfast)`}
+          </>
 
           <p>{isPaid ? 'Paid' : 'Will pay at property'}</p>
         </div>
